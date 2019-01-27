@@ -1,4 +1,16 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+#editor
+*~
+*.swp
+tags
+.vscode
+
+#build
+dist
+*log.json
+docs
+node_modules
+bundle*js
+*gz
 
 # compiled output
 /dist

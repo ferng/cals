@@ -3,6 +3,7 @@ const config = {};
 // server
 config.cals = {};
 config.cals.data= './cals.';
+config.cals.port = 3000;
 
 // logger
 config.logger = {};
