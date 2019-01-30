@@ -6,7 +6,8 @@
 
 const express = require('express');
 const log = require('../utils/logger.js').getLogger();
-const db = require('../utils/dbConn.js');
+const file = require('../store/file.js');
+// const db = require('../utils/dbConn.js');
 const runVal = require('../validation/run.js');
 
 
@@ -36,8 +37,8 @@ router.use((req, res, next) => {
  * @private
  */
 router.get('/*', (req, res) => {
-  const dataType = req.path.slice(1);
-  db.get(dataType, req.query)
+  const dataType = `${req.path.slice(1)}.json`;
+  file.read(dataType)
     .then((data) => {
       res.json(data);
     })
@@ -46,6 +47,10 @@ router.get('/*', (req, res) => {
       res.status(500).send('');
     });
 });
+
+
+
+
 
 
 // validate should not be a promise, the d stuff should be wrapped up in it
@@ -60,35 +65,35 @@ router.get('/*', (req, res) => {
  * @return {HTTP_response} HTTP-201 if OK, HTTP-500 if anything went wrong.
  * @private
  */
-router.post('/*', (req, res) => {
-  const dataType = req.path.slice(1);
-  runVal.validateRequest(dataType, req.body)
-    .then((data) => {
-      db.insertOne(dataType, data)
-        .then((id) => {
-          res.status(201).send({ id });
-        })
-        .catch((err) => {
-          log.error(err);
-          res.status(500).send('');
-        });
-    })
-    .catch((err) => {
-      log.error(err);
-      res.status(500).send('');
-    });
-});
-
-router.delete('/*', (req, res) => {
-  const dataType = req.path.slice(1);
-  db.remove(dataType, req.query)
-    .then(() => {
-      res.status(200).send('');
-    })
-    .catch((err) => {
-      log.error(err);
-      res.status(500).send('');
-    });
-});
+// router.post('/*', (req, res) => {
+//   const dataType = req.path.slice(1);
+//   runVal.validateRequest(dataType, req.body)
+//     .then((data) => {
+//       db.insertOne(dataType, data)
+//         .then((id) => {
+//           res.status(201).send({ id });
+//         })
+//         .catch((err) => {
+//           log.error(err);
+//           res.status(500).send('');
+//         });
+//     })
+//     .catch((err) => {
+//       log.error(err);
+//       res.status(500).send('');
+//     });
+// });
+// 
+// router.delete('/*', (req, res) => {
+//   const dataType = req.path.slice(1);
+//   db.remove(dataType, req.query)
+//     .then(() => {
+//       res.status(200).send('');
+//     })
+//     .catch((err) => {
+//       log.error(err);
+//       res.status(500).send('');
+//     });
+// });
 
 module.exports = router;
