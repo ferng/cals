@@ -9,8 +9,9 @@ const read = (path) =>
         reject(err);
         return;
       }
-      log.debug(`Retrieved data ${buffer}`);
-      resolve(JSON.parse(buffer));
+      const parsed = JSON.parse(buffer);
+      log.debug(`Retrieved data ${JSON.stringify(parsed)}`);
+      resolve(parsed);
     })
   });
 
