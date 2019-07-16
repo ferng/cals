@@ -1,14 +1,13 @@
 /**
  * Express router to deal with incoming lap REST requests.
- * @module src/routes/runs
+ * @module src/routes/cals
  * @private
  */
 
 const express = require('express');
 const log = require('../utils/logger.js').getLogger();
 const file = require('../store/file.js');
-// const db = require('../utils/dbConn.js');
-const runVal = require('../validation/run.js');
+// const runVal = require('../validation/cals.js');
 
 
 /**
@@ -25,8 +24,8 @@ router.use((req, res, next) => {
 
 
 /**
- * GET: Route returning existing Laps from database.
- * @name GET/api/runs
+ * GET: Route returning currently held food data
+ * @name GET/api/cals
  * @function
  * @memberof module:src/routes/runs~runsExpressRoutes
  * @inner
@@ -37,8 +36,7 @@ router.use((req, res, next) => {
  * @private
  */
 router.get('/*', (req, res) => {
-  const dataType = `${req.path.slice(1)}.json`;
-  file.read(dataType)
+  file.read("calories.json")
     .then((data) => {
       res.json(data);
     })

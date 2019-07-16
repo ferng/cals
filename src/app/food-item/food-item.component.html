@@ -1,0 +1,17 @@
+<div>
+    <span *ngIf="food">
+    <div *ngIf="headers">
+      Response headers:
+      <ul>
+        <li *ngFor="let header of headers">{{header}}</li>
+      </ul>
+    </div>
+    <div *ngIf="food">
+      Response headers:
+      <ul>
+        <li *ngFor="let item of food.food">{{item.item}}</li>
+      </ul>
+    </div>
+  </span>
+</div>
+<p *ngIf="error" class="error">{{error | json}}</p>

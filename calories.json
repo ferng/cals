@@ -1,0 +1,16 @@
+{
+  "food": [
+    {
+      "item": "Asparagus", "cal": 15
+    },
+    {
+      "item": "Tuna steak", "cal": 109
+    },
+    {
+      "item": "Salmon", "cal": 208
+    },
+    {
+      "item": "Broccolli", "cal": 31
+    }
+  ]
+}
