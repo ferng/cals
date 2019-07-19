@@ -7,12 +7,12 @@ import { catchError, retry } from 'rxjs/operators';
 
 export interface Food {
   food: {
-    Items: Item[];
+    items: Item[];
   };
 }
 
 export interface Item {
-  item: string;
+  name: string;
   cal: number;
 }
 

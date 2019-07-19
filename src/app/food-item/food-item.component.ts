@@ -11,8 +11,9 @@ import { Food, Item, FoodService } from './food-item.service';
 
 export class FoodItemComponent implements OnInit {
   error: any;
-  headers: String[];
-  food: Food;
+  headers: string[];
+  items: Item[];
+  selected: string;
 
   constructor(private foodService: FoodService) { }
 
@@ -28,7 +29,8 @@ export class FoodItemComponent implements OnInit {
         const keys = resp.headers.keys();
         this.headers = keys.map(key =>
           `${key}: ${resp.headers.get(key)}`);
-        this.food = { ... resp.body };
+        var food = { ... resp.body };
+        this.items = food.food;
       });
   }
 }

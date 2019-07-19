@@ -1,15 +1,25 @@
 <div>
-    <span *ngIf="food">
+    <span *ngIf="items">
     <div *ngIf="headers">
       Response headers:
       <ul>
         <li *ngFor="let header of headers">{{header}}</li>
       </ul>
     </div>
-    <div *ngIf="food">
+    <form>
+      <mat-form-field>
+        <mat-label>Food</mat-label>
+        <mat-select [(ngModel)]="selected" name="item">
+          <mat-option *ngFor="let item of items" value="item.name">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <div *ngIf="items">
       Response headers:
       <ul>
-        <li *ngFor="let item of food.food">{{item.item}}</li>
+        <li *ngFor="let item of items">{{item.name}}</li>
       </ul>
     </div>
   </span>
