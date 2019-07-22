@@ -6,16 +6,6 @@
         <li *ngFor="let header of headers">{{header}}</li>
       </ul>
     </div>
-    <form>
-      <mat-form-field>
-        <mat-label>Food</mat-label>
-        <mat-select [(ngModel)]="selected" name="item">
-          <mat-option *ngFor="let item of items" value="item.name">
-            {{item.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
     <div *ngIf="items">
       Response headers:
       <ul>

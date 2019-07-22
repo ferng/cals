@@ -30,7 +30,9 @@ export class FoodItemComponent implements OnInit {
         this.headers = keys.map(key =>
           `${key}: ${resp.headers.get(key)}`);
         var food = { ... resp.body };
-        this.items = food.food;
+        
+        this.items = (Object.keys(food).map(e=>food[e]))[0];
+        console.log(this.items[0]);
       });
   }
 }
