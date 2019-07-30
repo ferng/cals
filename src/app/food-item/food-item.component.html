@@ -1,17 +1,23 @@
 <div>
     <span *ngIf="items">
-    <div *ngIf="headers">
-      Response headers:
-      <ul>
-        <li *ngFor="let header of headers">{{header}}</li>
-      </ul>
-    </div>
-    <div *ngIf="items">
-      Response headers:
-      <ul>
-        <li *ngFor="let item of items">{{item.name}}</li>
-      </ul>
-    </div>
+    <form>
+			<mat-grid-list cols="3" rowHeight="2:1">
+        <mat-form-field class="food-item-list" appearance="standard">
+          <mat-select [(ngModel)]="selected" name="item" placeholder="select food">
+            <mat-option *ngFor="let item of items" value="item.name" >
+              {{item.name}} ({{item.cal}})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  			<mat-form-field class="food-item-text" appearance="standard">
+  				<input matInput type="number" placeholder="grams">
+  			</mat-form-field>
+  			<mat-form-field class="food-item-text" appearance="standard">
+  				<input matInput type="number" placeholder="calories">
+  			</mat-form-field>
+			</mat-grid-list>
+    </form>
   </span>
 </div>
+
 <p *ngIf="error" class="error">{{error | json}}</p>

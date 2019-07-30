@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700;subset=latin-ext');
+@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/theming';
+
+$app-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $body-1: mat-typography-level(12px, 20px, 500)
+);
+
+@include mat-core($app-typography);
+@include mat-base-typography($app-typography);
+@include angular-material-typography($app-typography);
+
+body, html {
+  margin: 0;
+  height: 100%;
+  font-size: mat-font-size($app-typography, body-1);
+  font-family: mat-font-family($app-typography);
+  line-height: mat-line-height($app-typography, body-1);
+}
+
+.food-item-list {
+  width: 40%;
+  margin-left: 5%;
+}
+
+.food-item-text {
+  width: 20%;
+  margin-left: 5%;
+}
+
+mat-select-content{
+  background-color: red !important;
+} 
+
