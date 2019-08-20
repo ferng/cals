@@ -1,26 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { Food, Item, FoodService } from './food-item.service';
+import { Item } from '../food-list/food-list.service';
 
 @Component({
   selector: 'app-food-item',
   templateUrl: './food-item.component.html',
   styleUrls: ['./food-item.component.css'],
-  providers: [ FoodService ]
 })
 
-
 export class FoodItemComponent implements OnInit {
-  error: any;
-  headers: string[];
-  items: Item[];
-	per100: number;
-  selection: string;
+  @Input() items: Items[];
 
-  constructor(private foodService: FoodService, private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit () {
-    this.loadFoodResponse();
+    console.log(this.items);
   }
 
 	foodForm = this.fb.group({
@@ -70,15 +64,4 @@ export class FoodItemComponent implements OnInit {
     return (data !== null && data !== undefined && data !== "");
   }
 
-  loadFoodResponse() {
-    this.foodService.getFoodResponse()
-      .subscribe(resp => {
-        const keys = resp.headers.keys();
-        this.headers = keys.map(key =>
-          `${key}: ${resp.headers.get(key)}`);
-        var food = { ... resp.body };
-        
-        this.items = (Object.keys(food).map(e=>food[e]))[0];
-      });
-  }
 }

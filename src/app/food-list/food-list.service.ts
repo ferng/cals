@@ -14,7 +14,9 @@ export interface Item {
   cal: number;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FoodService {
   foodUrl = 'http://localhost:3000/api/cals';
 
