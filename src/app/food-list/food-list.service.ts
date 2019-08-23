@@ -14,6 +14,11 @@ export interface Item {
   cal: number;
 }
 
+export interface UpdateMsg {
+  id: string;
+  cals: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })

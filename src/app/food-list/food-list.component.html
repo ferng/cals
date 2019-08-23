@@ -1,1 +1,7 @@
-<app-food-item [items]='items'></app-food-item>
+<app-food-item
+      *ngFor="let id of choiceIds"
+      [items]='items'
+      (calcCals)="onCalcCals($event)"
+      [id]=id>
+</app-food-item>
+

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Food, Item, FoodService } from '../food-list/food-list.service';
+import { Food, Item, UpdateMsg, FoodService } from '../food-list/food-list.service';
 
 @Component({
   selector: 'app-food-list',
@@ -13,11 +13,23 @@ export class FoodListComponent implements OnInit {
   error: any;
   headers: string[];
   items: Item[];
+  choiceIds: number;
+  itemCals: Map<string, number>;
 
   constructor(private foodService: FoodService) { }
 
   ngOnInit() {
     this.loadFoodResponse();
+    this.choiceIds = Array(7).fill(0).map((x,i)=>'item-'+i);
+    this.itemCals = new Map<string, numner>();
+  }
+
+  onCalcCals(calcCals: UpdateMsg) {
+    let totalCals = 0;
+    this.itemCals.set(calcCals.id, calcCals.cals);
+    this.itemCals.forEach((cal) => {
+      totalCals += cal;
+    });  
   }
 
   loadFoodResponse() {
