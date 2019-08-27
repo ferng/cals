@@ -4,4 +4,11 @@
       (calcCals)="onCalcCals($event)"
       [id]=id>
 </app-food-item>
-
+<div [id]="totalCals" [ngClass]="{
+  'cals-below': totalsCals <= 300,
+  'cals-above': totalCals > 300
+}"> 
+  <h3>
+    {{totalCals}}
+  </h3>
+</div>

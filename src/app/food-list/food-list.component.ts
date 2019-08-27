@@ -15,10 +15,12 @@ export class FoodListComponent implements OnInit {
   items: Item[];
   choiceIds: number;
   itemCals: Map<string, number>;
+  totalCals: number;
 
   constructor(private foodService: FoodService) { }
 
   ngOnInit() {
+    this.totalCals = 0;
     this.loadFoodResponse();
     this.choiceIds = Array(7).fill(0).map((x,i)=>'item-'+i);
     this.itemCals = new Map<string, numner>();
@@ -29,7 +31,9 @@ export class FoodListComponent implements OnInit {
     this.itemCals.set(calcCals.id, calcCals.cals);
     this.itemCals.forEach((cal) => {
       totalCals += cal;
-    });  
+    });
+    this.totalCals = totalCals;
+    console.log(totalCals);
   }
 
   loadFoodResponse() {
