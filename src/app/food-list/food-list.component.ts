@@ -36,6 +36,12 @@ export class FoodListComponent implements OnInit {
     console.log(totalCals);
   }
 
+  clearItems() {
+    this.itemCals.forEach((cal) => {
+      cal.clearItem();
+    });
+  }
+
   loadFoodResponse() {
     this.foodService.getFoodResponse()
       .subscribe(resp => {

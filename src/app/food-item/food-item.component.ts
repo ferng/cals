@@ -65,6 +65,10 @@ export class FoodItemComponent implements OnInit {
     this.calcCals.emit(updateMsg);
   }
 
+  clearItem() {
+    console.log(this.cals);
+  };
+
   notBlank(data: string) {
     return (data !== null && data !== undefined && data !== "");
   }

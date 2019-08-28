@@ -7,8 +7,12 @@
 <div [id]="totalCals" [ngClass]="{
   'cals-below': totalsCals <= 300,
   'cals-above': totalCals > 300
-}"> 
+  }"> 
   <h3>
     {{totalCals}}
   </h3>
+</div>
+<div>
+  <button mat-raised-button (click)="editItems()" color="primary">Edit</button>
+  <button mat-raised-button (click)="clearItems()" color="warn">Clear</button>
 </div>
