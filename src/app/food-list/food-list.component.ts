@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ViewChildren } from '@angular/core';
 
 import { Food, Item, UpdateMsg, FoodService } from '../food-list/food-list.service';
+import { FoodItemComponent } from '../food-item/food-item.component';
 
 @Component({
   selector: 'app-food-list',
@@ -9,11 +11,13 @@ import { Food, Item, UpdateMsg, FoodService } from '../food-list/food-list.servi
   providers: [ FoodService ]
 })
 
-export class FoodListComponent implements OnInit {
+export class FoodListComponent implements OnInit, AfterViewInit {
+  @ViewChildren('foodItem') itemRefs;
+
   error: any;
   headers: string[];
   items: Item[];
-  choiceIds: number;
+  choiceIds: string[];
   itemCals: Map<string, number>;
   totalCals: number;
 
@@ -23,8 +27,10 @@ export class FoodListComponent implements OnInit {
     this.totalCals = 0;
     this.loadFoodResponse();
     this.choiceIds = Array(7).fill(0).map((x,i)=>'item-'+i);
-    this.itemCals = new Map<string, numner>();
+    this.itemCals = new Map<string, number>();
   }
+
+  ngAfterViewInit() {}
 
   onCalcCals(calcCals: UpdateMsg) {
     let totalCals = 0;
@@ -33,13 +39,13 @@ export class FoodListComponent implements OnInit {
       totalCals += cal;
     });
     this.totalCals = totalCals;
-    console.log(totalCals);
   }
 
   clearItems() {
-    this.itemCals.forEach((cal) => {
-      cal.clearItem();
+    this.itemRefs.forEach((item) => {
+      item.clearItem();       
     });
+    this.totalCals = 0;
   }
 
   loadFoodResponse() {

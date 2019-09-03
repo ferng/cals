@@ -1,4 +1,5 @@
 <app-food-item
+      #foodItem
       *ngFor="let id of choiceIds"
       [items]='items'
       (calcCals)="onCalcCals($event)"

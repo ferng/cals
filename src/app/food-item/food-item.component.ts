@@ -10,7 +10,7 @@ import { Item, UpdateMsg } from '../food-list/food-list.service';
 
 export class FoodItemComponent implements OnInit {
   @Input() items: Item[];
-  @Input() id: number;
+  @Input() id: string;
   @Output() calcCals = new EventEmitter<UpdateMsg>();
 
   constructor(private fb: FormBuilder) { }
@@ -61,12 +61,11 @@ export class FoodItemComponent implements OnInit {
 
   notifyParent(selCal) {
     const updateMsg = {"id": this.id, "cals": Number.parseInt(this.foodForm.value.cals, 10)};
-    console.log(this);
     this.calcCals.emit(updateMsg);
   }
 
   clearItem() {
-    console.log(this.cals);
+    this.foodForm.reset();
   };
 
   notBlank(data: string) {
