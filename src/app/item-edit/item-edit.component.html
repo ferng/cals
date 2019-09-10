@@ -1,0 +1,16 @@
+<div>
+  <span *ngIf="item">
+    <form [formGroup]="foodEdit">
+			<mat-grid-list cols="2" rowHeight="2:1">
+  			<mat-form-field class="food-item-text" appearance="standard" >
+  				<input matInput type="text" placeholder="name" formControlName="name" [value]="item.name">
+  			</mat-form-field>
+  			<mat-form-field class="food-item-text" appearance="standard">
+  				<input matInput type="tel" placeholder="cals" formControlName="cals" [value]="item.cal">
+  			</mat-form-field>
+			</mat-grid-list>
+    </form>
+  </span>
+</div>
+
+<p *ngIf="error" class="error">{{error | json}}</p>

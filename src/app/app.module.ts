@@ -11,6 +11,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { AppComponent } from './app.component';
 import { FoodItemComponent } from './food-item/food-item.component';
 import { FoodListComponent } from './food-list/food-list.component';
+import { ItemEditComponent } from './item-edit/item-edit.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { FoodListComponent } from './food-list/food-list.component';
   declarations: [
     AppComponent,
     FoodItemComponent,
-    FoodListComponent
+    FoodListComponent,
+    ItemEditComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

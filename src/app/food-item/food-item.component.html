@@ -1,5 +1,5 @@
 <div>
-    <span *ngIf="items">
+  <span *ngIf="items">
     <form [formGroup]="foodForm">
 			<mat-grid-list cols="3" rowHeight="2:1">
         <mat-form-field class="food-item-list" appearance="standard">
@@ -9,7 +9,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-  			<mat-form-field #gramsEntry class="food-item-text" appearance="standard" >
+  			<mat-form-field class="food-item-text" appearance="standard" >
   				<input matInput type="tel" placeholder="grams" formControlName="grams" (blur)="calcCalsFromGrams()">
   			</mat-form-field>
   			<mat-form-field class="food-item-text" appearance="standard">

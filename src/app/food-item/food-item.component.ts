@@ -7,7 +7,6 @@ import { Item, UpdateMsg } from '../food-list/food-list.service';
   templateUrl: './food-item.component.html',
   styleUrls: ['./food-item.component.css'],
 })
-
 export class FoodItemComponent implements OnInit {
   @Input() items: Item[];
   @Input() id: string;

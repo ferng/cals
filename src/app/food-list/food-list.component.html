@@ -1,19 +1,34 @@
-<app-food-item
-      #foodItem
-      *ngFor="let id of choiceIds"
-      [items]='items'
-      (calcCals)="onCalcCals($event)"
-      [id]=id>
-</app-food-item>
-<div [id]="totalCals" [ngClass]="{
-  'cals-below': totalsCals <= 300,
-  'cals-above': totalCals > 300
-  }"> 
-  <h3>
-    {{totalCals}}
-  </h3>
+<div *ngIf="displayList" id="food-list">
+  <app-food-item
+        #foodItem
+        *ngFor="let id of choiceIds"
+        [items]='items'
+        (calcCals)="onCalcCals($event)"
+        [id]="'item-'+id">
+  </app-food-item>
+  <div [id]="totalCals" [ngClass]="{
+    'cals-below': totalsCals <= 300,
+    'cals-above': totalCals > 300
+    }"> 
+    <h3>
+      {{totalCals}}
+    </h3>
+  </div>
+  <div>
+    <button mat-raised-button (click)="editItems()" color="primary">Edit</button>
+    <button mat-raised-button (click)="clearItems()" color="warn">Clear</button>
+  </div>
 </div>
-<div>
-  <button mat-raised-button (click)="editItems()" color="primary">Edit</button>
-  <button mat-raised-button (click)="clearItems()" color="warn">Clear</button>
+<div *ngIf="displayEdit" id="list-edit">
+  <app-item-edit
+      *ngFor="let item of items"
+      [item]='item'
+      [id]="stripSpace(item.name)">
+  </app-item-edit>
+  <div>
+    <button mat-raised-button (click)="newItem()" color="primary">New</button>
+    <button mat-raised-button (click)="resetItems()" color="primary">Reset</button>
+    <button mat-raised-button (click)="cancelChange()" color="warn">Cancel</button>
+    <button mat-raised-button (click)="submitChange()" color="warn">OK</button>
+  </div>
 </div>
