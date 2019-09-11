@@ -7,6 +7,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { FoodItemComponent } from './food-item/food-item.component';
@@ -23,7 +24,8 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
     NoopAnimationsModule,
     MatSelectModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    MatButtonModule,
   ],
   declarations: [
     AppComponent,
