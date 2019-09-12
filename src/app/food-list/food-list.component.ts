@@ -18,7 +18,7 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   error: any;
   headers: string[];
   items: Item[];
-  choiceIds: number[];
+  counter: number[];
   itemCals: Map<string, number>;
   totalCals: number;
   displayList: boolean;
@@ -30,7 +30,7 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.totalCals = 0;
     this.loadFoodResponse();
-    this.choiceIds = Array(7).fill(0).map((x,i)=>i);
+    this.counter = Array(7).fill(0).map((x,i)=>i);
     this.itemCals = new Map<string, number>();
     this.displayList = true;
     this.displayEdit = false;
@@ -59,11 +59,6 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     this.displayEdit = true;
   }
 
-  stripSpace(item: string) {
-    var regex = / /gi;
-    return item.replace(regex, '_');
-
-  }
 
   loadFoodResponse() {
     this.foodService.getFoodResponse()

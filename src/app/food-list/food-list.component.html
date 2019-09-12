@@ -1,10 +1,10 @@
 <div *ngIf="displayList" id="food-list">
   <app-food-item
         #foodItem
-        *ngFor="let id of choiceIds"
+        *ngFor="let current of counter"
         [items]='items'
         (calcCals)="onCalcCals($event)"
-        [id]="'item-'+id">
+        [id]="'ingredient-'+current">
   </app-food-item>
   <div [id]="totalCals" [ngClass]="{
     'cals-below': totalsCals <= 300,
@@ -21,9 +21,9 @@
 </div>
 <div *ngIf="displayEdit" id="list-edit">
   <app-item-edit
-      *ngFor="let item of items"
-      [item]='item'
-      [id]="stripSpace(item.name)">
+        *ngFor="let item of items let id=index"
+        [item]='item'
+        [id]="'item-'+id">
   </app-item-edit>
   <div>
     <button mat-raised-button (click)="newItem()" color="primary">New</button>
