@@ -3,7 +3,7 @@ import { AfterViewInit, ViewChildren } from '@angular/core';
 
 import { Food, Item, UpdateMsg, FoodService } from '../food-list/food-list.service';
 import { FoodItemComponent } from '../food-item/food-item.component';
-import { ItemEditComponent } from '../item-edit/item-edit.component';
+import { ItemShowComponent } from '../item-show/item-show.component';
 
 @Component({
   selector: 'app-food-list',

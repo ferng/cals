@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { FoodItemComponent } from './food-item/food-item.component';
 import { FoodListComponent } from './food-list/food-list.component';
 import { ItemEditComponent } from './item-edit/item-edit.component';
+import { ItemShowComponent } from './item-show/item-show.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { ItemEditComponent } from './item-edit/item-edit.component';
     FoodItemComponent,
     FoodListComponent,
     ItemEditComponent,
+    ItemShowComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

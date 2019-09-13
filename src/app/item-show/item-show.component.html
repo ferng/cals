@@ -1,0 +1,14 @@
+<div>
+  <span *ngIf="item">
+			<mat-grid-list cols="2" rowHeight="2:1">
+        <div>
+          {{item.name}}
+        </div>
+        <div>
+          {{item.cal}}
+        </div>
+			</mat-grid-list>
+  </span>
+</div>
+
+<p *ngIf="error" class="error">{{error | json}}</p>

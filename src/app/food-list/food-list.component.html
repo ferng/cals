@@ -1,4 +1,4 @@
-<div *ngIf="displayList" id="food-list">
+<div *ngIf="displayList">
   <app-food-item
         #foodItem
         *ngFor="let current of counter"
@@ -19,12 +19,12 @@
     <button mat-stroked-button (click)="clearItems()" color="primary">Clear</button>
   </div>
 </div>
-<div *ngIf="displayEdit" id="list-edit">
-  <app-item-edit
+<div *ngIf="displayEdit">
+  <app-item-show
         *ngFor="let item of items let id=index"
         [item]='item'
         [id]="'item-'+id">
-  </app-item-edit>
+  </app-item-show>
   <div>
     <button mat-raised-button (click)="newItem()" color="primary">New</button>
     <button mat-raised-button (click)="resetItems()" color="primary">Reset</button>
