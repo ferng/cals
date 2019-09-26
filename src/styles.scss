@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700;subset=latin-ext');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~@angular/material/theming';
 
@@ -35,7 +36,7 @@ mat-select-content{
 } 
 
 .cals {
-  text-align:center;
+  text-align: center;
 }
 
 .cals-below {
@@ -46,4 +47,16 @@ mat-select-content{
   color: red;
 }
 
+.edit-list-name {
+  font-size: mat-font-size($app-typography, subheading-2);
+  font-family: mat-font-family($app-typography);
+}
 
+.edit-list-cal {
+  font-size: mat-font-size($app-typography, body-1);
+  font-family: mat-font-family($app-typography);
+}
+
+table {
+  width: 100%;
+}

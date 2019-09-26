@@ -1,14 +1,36 @@
-<div>
-  <span *ngIf="item">
-			<mat-grid-list cols="2" rowHeight="2:1">
-        <div>
-          {{item.name}}
-        </div>
-        <div>
-          {{item.cal}}
-        </div>
-			</mat-grid-list>
-  </span>
-</div>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let item"> {{item.name}} </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="cals">
+      <th mat-header-cell *matHeaderCellDef> Cals </th>
+      <td mat-cell *matCellDef="let item"> {{item.cals}} </td>
+    </ng-container>
+ 
+    <!-- Action Column 
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element" class="action-link"> 
+        <a (click)="openDialog('Update',element)">Edit</a> | 
+        <a (click)="openDialog('Delete',element)">Delete</a>  
+      </td>
+    </ng-container>
 
-<p *ngIf="error" class="error">{{error | json}}</p>
+<span *ngIf="item">
+    <span class="edit-list-name">
+      {{item.name}}
+    </span>
+    <span class="edit-list-cal">
+      {{item.cal}}
+    </span>
+      <button mat-icon-button color="primary" (click)="showInfo(link)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="showInfo(link)">
+        <mat-icon>delete</mat-icon>
+    </button>
+    </span>
+    -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

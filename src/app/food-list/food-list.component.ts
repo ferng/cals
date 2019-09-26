@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AfterViewInit, ViewChildren } from '@angular/core';
+import { AfterViewInit, ViewChildren, ViewChild } from '@angular/core';
 
 import { Food, Item, UpdateMsg, FoodService } from '../food-list/food-list.service';
 import { FoodItemComponent } from '../food-item/food-item.component';
 import { ItemShowComponent } from '../item-show/item-show.component';
+
+import { MatDialog, MatTable } from '@angular/material';
 
 @Component({
   selector: 'app-food-list',
@@ -24,6 +26,8 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   displayList: boolean;
   displayEdit: boolean;
 
+  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
+  displayedColumns: string[] = ['name', 'cal'];
 
   constructor(private foodService: FoodService) { }
 
@@ -67,8 +71,8 @@ export class FoodListComponent implements OnInit, AfterViewInit {
         this.headers = keys.map(key =>
           `${key}: ${resp.headers.get(key)}`);
         var food = { ... resp.body };
-        
-        this.items = (Object.keys(food).map(e=>food[e]))[0];
+        this.items = food.food;
+       console.log(JSON.stringify(this.items)); 
       });
   }
 }

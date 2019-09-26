@@ -6,8 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatIconRegistry } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
+
 
 import { AppComponent } from './app.component';
 import { FoodItemComponent } from './food-item/food-item.component';
@@ -25,8 +30,11 @@ import { ItemShowComponent } from './item-show/item-show.component';
     NoopAnimationsModule,
     MatSelectModule,
     MatInputModule,
-    MatGridListModule,
+    MatTableModule,
     MatButtonModule,
+    MatListModule,
+    MatIconModule,
+    MatGridListModule,
   ],
   declarations: [
     AppComponent,
