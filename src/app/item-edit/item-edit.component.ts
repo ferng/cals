@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Item } from '../food-list/food-list.service';
+
+import { MatDialog, MatTable } from '@angular/material';
 
 @Component({
   selector: 'app-item-edit',
@@ -8,15 +10,11 @@ import { Item } from '../food-list/food-list.service';
   styleUrls: ['./item-edit.component.css']
 })
 export class ItemEditComponent implements OnInit {
-  @Input() item: Item;
-  @Input() id: string;
+  @Input() items: Item[];
+  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
+  displayedColumns: string[] = ['name', 'cal', 'action'];
 
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit() { }
-
-	foodEdit = this.fb.group({
-		name : [''],
-		cals : [''],
-	});	
 }

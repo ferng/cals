@@ -47,16 +47,17 @@ mat-select-content{
   color: red;
 }
 
-.edit-list-name {
-  font-size: mat-font-size($app-typography, subheading-2);
-  font-family: mat-font-family($app-typography);
-}
-
-.edit-list-cal {
+table {
   font-size: mat-font-size($app-typography, body-1);
   font-family: mat-font-family($app-typography);
+  width: 100%;
 }
 
-table {
-  width: 100%;
+thead {
+  display: none;
+}
+
+.mat-column-action {
+  text-align: right;
+  justify-content: flex-end;
 }

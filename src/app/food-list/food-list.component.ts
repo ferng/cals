@@ -72,7 +72,6 @@ export class FoodListComponent implements OnInit, AfterViewInit {
           `${key}: ${resp.headers.get(key)}`);
         var food = { ... resp.body };
         this.items = food.food;
-       console.log(JSON.stringify(this.items)); 
       });
   }
 }

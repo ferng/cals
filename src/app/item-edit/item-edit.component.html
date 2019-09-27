@@ -1,16 +1,30 @@
-<div>
-  <span *ngIf="item">
-    <form [formGroup]="foodEdit">
-			<mat-grid-list cols="2" rowHeight="2:1">
-  			<mat-form-field class="food-item-text" appearance="standard" >
-  				<input matInput type="text" placeholder="name" formControlName="name" [value]="item.name">
-  			</mat-form-field>
-  			<mat-form-field class="food-item-text" appearance="standard">
-  				<input matInput type="tel" placeholder="cals" formControlName="cals" [value]="item.cal">
-  			</mat-form-field>
-			</mat-grid-list>
-    </form>
-  </span>
-</div>
+  <table mat-table [dataSource]="items" #foodTable>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let item"> {{item.name}} </td>
+    </ng-container>
+ 
+    <ng-container matColumnDef="cal">
+      <th mat-header-cell *matHeaderCellDef> Cals </th>
+      <td mat-cell *matCellDef="let item"> {{item.cal}} </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element" class="action-link"> 
+      <button mat-icon-button color="primary" (click)="showInfo(link)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="showInfo(link)">
+        <mat-icon>delete</mat-icon>
+    </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+ 
+
 
 <p *ngIf="error" class="error">{{error | json}}</p>
