@@ -5,7 +5,7 @@ import { Food, Item, UpdateMsg, FoodService } from '../food-list/food-list.servi
 import { FoodItemComponent } from '../food-item/food-item.component';
 import { ItemShowComponent } from '../item-show/item-show.component';
 
-import { MatDialog, MatTable } from '@angular/material';
+import { MatTable } from '@angular/material';
 
 @Component({
   selector: 'app-food-list',
@@ -24,7 +24,8 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   itemCals: Map<string, number>;
   totalCals: number;
   displayList: boolean;
-  displayEdit: boolean;
+  displayEditiList: boolean;
+  displayEditor: boolean;
 
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
   displayedColumns: string[] = ['name', 'cal'];
@@ -37,7 +38,8 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     this.counter = Array(7).fill(0).map((x,i)=>i);
     this.itemCals = new Map<string, number>();
     this.displayList = true;
-    this.displayEdit = false;
+    this.displayEditList = false;
+    this.displayEditor = false;
   }
 
   ngAfterViewInit() {}
@@ -60,9 +62,27 @@ export class FoodListComponent implements OnInit, AfterViewInit {
 
   editItems() {
     this.displayList = false;
-    this.displayEdit = true;
+    this.displayEditList = true;
+    this.displayEditor = false;
   }
 
+
+  listItems() {
+    this.displayList = true;
+    this.displayEditList = false;
+    this.displayEditor = false;
+  }
+
+  openEditor(editItem: UpdatedMsg) {
+    console.log(editItem);
+    this.displayList = false;
+    this.displayEditList = false;
+    this.displayEditor = true;
+  }
+
+  onUpdate(updated: UpdateMsg) {
+    console.log(updated);
+  }
 
   loadFoodResponse() {
     this.foodService.getFoodResponse()

@@ -1,21 +1,19 @@
 <div>
   <span *ngIf="items">
     <form [formGroup]="foodForm">
-			<mat-grid-list cols="3" rowHeight="2:1">
-        <mat-form-field class="food-item-list" appearance="standard">
-          <mat-select formControlName="selectedCal" placeholder="select food" (selectionChange)="newSelection(item)" >
-            <mat-option *ngFor="let item of items" [value]="item.cal">
-              {{item.name}} ({{item.cal}})
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-  			<mat-form-field class="food-item-text" appearance="standard" >
-  				<input matInput type="tel" placeholder="grams" formControlName="grams" (blur)="calcCalsFromGrams()">
-  			</mat-form-field>
-  			<mat-form-field class="food-item-text" appearance="standard">
+      <mat-form-field class="food-item-list" appearance="standard">
+        <mat-select formControlName="selectedCal" placeholder="select food" (selectionChange)="newSelection(item)" >
+          <mat-option *ngFor="let item of items" [value]="item.cal">
+            {{item.name}} ({{item.cal}})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    	<mat-form-field class="food-item-text" appearance="standard" >
+  	  	<input matInput type="tel" placeholder="grams" formControlName="grams" (blur)="calcCalsFromGrams()">
+    	</mat-form-field>
+      <mat-form-field class="food-item-text" appearance="standard">
   				<input matInput type="tel" placeholder="calories" formControlName="cals" (blur)="calcGramsFromCals()">
-  			</mat-form-field>
-			</mat-grid-list>
+      </mat-form-field>
     </form>
   </span>
 </div>

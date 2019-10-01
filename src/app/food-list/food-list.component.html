@@ -19,15 +19,16 @@
     <button mat-stroked-button (click)="clearItems()" color="primary">Clear</button>
   </div>
 </div>
-<div *ngIf="displayEdit">
+<div *ngIf="displayEditList">
   <app-item-edit
         #editItem
         [items]='items'>
   </app-item-edit>
   <div>
     <button mat-raised-button (click)="newItem()" color="primary">New</button>
-    <button mat-raised-button (click)="resetItems()" color="primary">Reset</button>
-    <button mat-raised-button (click)="cancelChange()" color="warn">Cancel</button>
-    <button mat-raised-button (click)="submitChange()" color="warn">OK</button>
+    <button mat-raised-button (click)="listItems()" color="warn">OK</button>
   </div>
+</div>
+<div *ngIf="displayEditor">
+  hello
 </div>

@@ -11,14 +11,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatIconRegistry } from '@angular/material/icon';
-import { MatGridListModule } from '@angular/material/grid-list';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { FoodItemComponent } from './food-item/food-item.component';
 import { FoodListComponent } from './food-list/food-list.component';
 import { ItemEditComponent } from './item-edit/item-edit.component';
-import { ItemShowComponent } from './item-show/item-show.component';
+import { FoodEditorComponent } from './food-editor/food-editor.component';
 
 @NgModule({
   imports: [
@@ -34,14 +33,14 @@ import { ItemShowComponent } from './item-show/item-show.component';
     MatButtonModule,
     MatListModule,
     MatIconModule,
-    MatGridListModule,
+    MatDialogModule,
   ],
   declarations: [
     AppComponent,
     FoodItemComponent,
     FoodListComponent,
     ItemEditComponent,
-    ItemShowComponent,
+    FoodEditorComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

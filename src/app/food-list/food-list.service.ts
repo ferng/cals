@@ -16,6 +16,7 @@ export interface Item {
 
 export interface UpdateMsg {
   id: string;
+  name: string;
   cals: number;
 }
 
