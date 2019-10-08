@@ -1,16 +1,16 @@
 {
   "food": [
     {
-      "name": "Asparagus", "cal": 15
+      "id": 0, "name": "Asparagus", "cal": 15
     },
     {
-      "name": "Tuna steak", "cal": 109
+      "id": 1, "name": "Tuna steak", "cal": 109
     },
     {
-      "name": "Salmon", "cal": 208
+      "id": 2, "name": "Salmon", "cal": 208
     },
     {
-      "name": "Broccoli", "cal": 31
+      "id": 3, "name": "Broccoli", "cal": 31
     }
   ]
 }

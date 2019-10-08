@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChildren, ViewChild } from '@angular/core';
 
-import { Food, Item, UpdateMsg, FoodService } from '../food-list/food-list.service';
+import { Food, Item, FoodService } from '../food-list/food-list.service';
 import { FoodItemComponent } from '../food-item/food-item.component';
-import { ItemShowComponent } from '../item-show/item-show.component';
 
 import { MatTable } from '@angular/material';
 
@@ -21,10 +20,10 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   headers: string[];
   items: Item[];
   counter: number[];
-  itemCals: Map<string, number>;
+  itemCals: Map<number, number>;
   totalCals: number;
   displayList: boolean;
-  displayEditiList: boolean;
+  displayEditList: boolean;
   displayEditor: boolean;
 
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
@@ -36,7 +35,7 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     this.totalCals = 0;
     this.loadFoodResponse();
     this.counter = Array(7).fill(0).map((x,i)=>i);
-    this.itemCals = new Map<string, number>();
+    this.itemCals = new Map<number, number>();
     this.displayList = true;
     this.displayEditList = false;
     this.displayEditor = false;
@@ -44,9 +43,9 @@ export class FoodListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {}
 
-  onCalcCals(calcCals: UpdateMsg) {
+  onCalcCals(calcCals: Item) {
     let totalCals = 0;
-    this.itemCals.set(calcCals.id, calcCals.cals);
+    this.itemCals.set(calcCals.id, calcCals.cal);
     this.itemCals.forEach((cal) => {
       totalCals += cal;
     });
@@ -73,14 +72,14 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     this.displayEditor = false;
   }
 
-  openEditor(editItem: UpdatedMsg) {
+  openEditor(editItem: Item) {
     console.log(editItem);
     this.displayList = false;
     this.displayEditList = false;
     this.displayEditor = true;
   }
 
-  onUpdate(updated: UpdateMsg) {
+  onUpdate(updated: Item) {
     console.log(updated);
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { Item, UpdateMsg } from '../food-list/food-list.service';
+import { Item } from '../food-list/food-list.service';
 
 import { MatTable } from '@angular/material';
 
@@ -12,7 +12,7 @@ import { MatTable } from '@angular/material';
 export class ItemEditComponent implements OnInit {
   @Input() items: Item[];
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
-  @Output() calcCals = new EventEmitter<UpdateMsg>();
+  @Output() calcCals = new EventEmitter<Item>();
   
   displayedColumns: string[] = ['name', 'cal', 'action'];
 

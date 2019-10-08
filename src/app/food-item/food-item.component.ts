@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { Item, UpdateMsg } from '../food-list/food-list.service';
+import { Item } from '../food-list/food-list.service';
 
 @Component({
   selector: 'app-food-item',
@@ -9,20 +9,19 @@ import { Item, UpdateMsg } from '../food-list/food-list.service';
 })
 export class FoodItemComponent implements OnInit {
   @Input() items: Item[];
-  @Input() id: string;
-  @Output() calcCals = new EventEmitter<UpdateMsg>();
+  @Output() calcCals = new EventEmitter<Item>();
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit () { }
 
 	foodForm = this.fb.group({
-		selectedCal : [''],
+    id : [''],
 		grams : [''],
 		cals : [''],
 	});	
 
-	newSelection(event) {
+	newSelection() {
 		this.updateCals();
 	}
 
@@ -35,32 +34,32 @@ export class FoodItemComponent implements OnInit {
   }
 
   updateCals() {
-    const selCal = this.foodForm.value.selectedCal;
+    const selected = this.items[this.foodForm.value.id]
     const grams = this.foodForm.value.grams;
     const cals = this.foodForm.value.cals;
  
-    if (this.notBlank(grams) && this.notBlank(selCal)) {
-      this.foodForm.value.cals = Math.ceil((Number.parseInt(selCal) / 100) * Number.parseInt(grams));
+    if (this.notBlank(grams)) {
+      this.foodForm.value.cals = Math.ceil((selected.cal / 100) * Number.parseInt(grams));
       this.notifyParent(this.foodForm.value.cals);
       this.foodForm.setValue(this.foodForm.value);
     }
   }
   
   updateGrams() {
-    const selCal = this.foodForm.value.selectedCal;
+    const selected = this.items[this.foodForm.value.id]
     const grams = this.foodForm.value.grams;
     const cals = this.foodForm.value.cals;
  
-    if (this.notBlank(cals) && this.notBlank(selCal)) {
-      this.foodForm.value.grams = Math.floor((Number.parseInt(cals) / Number.parseInt(selCal)) * 100);
+    if (this.notBlank(cals)) {
+      this.foodForm.value.grams = Math.floor((Number.parseInt(cals) / selected.cal) * 100);
       this.notifyParent(this.foodForm.value.cals);
       this.foodForm.setValue(this.foodForm.value);
     }
   }
 
   notifyParent(selCal) {
-    const updateMsg = {"id": this.id, "cals": Number.parseInt(this.foodForm.value.cals, 10)};
-    this.calcCals.emit(updateMsg);
+    const updated = {"id": Number.parseInt(this.foodForm.value.id,10), "name": this.foodForm.value.name, "cal": Number.parseInt(this.foodForm.value.cals, 10)};
+    this.calcCals.emit(updated);
   }
 
   clearItem() {

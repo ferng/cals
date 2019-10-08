@@ -2,17 +2,18 @@
   <span *ngIf="items">
     <form [formGroup]="foodForm">
       <mat-form-field class="food-item-list" appearance="standard">
-        <mat-select formControlName="selectedCal" placeholder="select food" (selectionChange)="newSelection(item)" >
-          <mat-option *ngFor="let item of items" [value]="item.cal">
+        <mat-label>select food</mat-label>
+        <select matNativeControl formControlName="id" (change)="newSelection(this)" >
+          <option *ngFor="let item of items" [value]="item.id">
             {{item.name}} ({{item.cal}})
-          </mat-option>
-        </mat-select>
+          </option>
+        </select>
       </mat-form-field>
     	<mat-form-field class="food-item-text" appearance="standard" >
-  	  	<input matInput type="tel" placeholder="grams" formControlName="grams" (blur)="calcCalsFromGrams()">
+  	  	<input matInput type="tel" placeholder="grams" formControlName="grams" (change)="calcCalsFromGrams()">
     	</mat-form-field>
       <mat-form-field class="food-item-text" appearance="standard">
-  				<input matInput type="tel" placeholder="calories" formControlName="cals" (blur)="calcGramsFromCals()">
+  				<input matInput type="tel" placeholder="calories" formControlName="cals" (change)="calcGramsFromCals()">
       </mat-form-field>
     </form>
   </span>

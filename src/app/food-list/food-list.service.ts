@@ -10,14 +10,9 @@ export interface Food {
 }
 
 export interface Item {
+  id: number;
   name: string;
   cal: number;
-}
-
-export interface UpdateMsg {
-  id: string;
-  name: string;
-  cals: number;
 }
 
 @Injectable({
