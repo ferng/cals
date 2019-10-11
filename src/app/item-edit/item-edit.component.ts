@@ -12,11 +12,22 @@ import { MatTable } from '@angular/material';
 export class ItemEditComponent implements OnInit {
   @Input() items: Item[];
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
-  @Output() calcCals = new EventEmitter<Item>();
+  @Output() updateItems = new EventEmitter<iItem[]>();
   
   displayedColumns: string[] = ['name', 'cal', 'action'];
 
   constructor() { }
 
   ngOnInit() { }
+
+  deleteItem(id) {
+    for (let i = 0; i < this.items.length; i++){
+      if (this.items[i].id === id) {
+        this.items.splice(i, 1);
+        break;
+      }
+    }
+    this.table.renderRows();
+    this.updateItems.emit(this.items);
+  }
 }

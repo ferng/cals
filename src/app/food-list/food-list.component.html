@@ -22,6 +22,7 @@
 <div *ngIf="displayEditList">
   <app-item-edit
         #editItem
+        (updateItems)="onUpdateItems($event)"
         [items]='items'>
   </app-item-edit>
   <div>

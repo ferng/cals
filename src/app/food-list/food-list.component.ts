@@ -52,6 +52,10 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     this.totalCals = totalCals;
   }
 
+  onUpdateItems(newItems: Item[]) {
+    console.log(newItems);
+  }
+
   clearItems() {
     this.itemRefs.forEach((item) => {
       item.clearItem();       
@@ -79,9 +83,6 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     this.displayEditor = true;
   }
 
-  onUpdate(updated: Item) {
-    console.log(updated);
-  }
 
   loadFoodResponse() {
     this.foodService.getFoodResponse()
