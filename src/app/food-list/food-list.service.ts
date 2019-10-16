@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -23,7 +23,6 @@ export class FoodService {
 
   constructor(private http: HttpClient) { }
 
-
   //get json data
   getFood() {
     return this.http.get<Food>(this.foodUrl)
@@ -36,14 +35,22 @@ export class FoodService {
 
   //get complete http response
   getFoodResponse(): Observable<HttpResponse<Food>> {
-    return this.http.get<Food>(
-      this.foodUrl, { observe: 'response' })
+    return this.http.get<Food>(this.foodUrl, { observe: 'response' })
         .pipe(
           retry(3),
           catchError(this.handleError)
         );
   }
 
+
+  //send updated list of items to be saved
+  updateFoodData(food: Food): Observable<Food> {
+    return this.http.put<Food>(this.foodUrl, food)
+        .pipe(
+          retry(3),
+          catchError(this.handleError)
+        );
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

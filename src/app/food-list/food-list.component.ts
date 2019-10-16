@@ -52,10 +52,6 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     this.totalCals = totalCals;
   }
 
-  onUpdateItems(newItems: Item[]) {
-    console.log(newItems);
-  }
-
   clearItems() {
     this.itemRefs.forEach((item) => {
       item.clearItem();       
@@ -83,7 +79,6 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     this.displayEditor = true;
   }
 
-
   loadFoodResponse() {
     this.foodService.getFoodResponse()
       .subscribe(resp => {
@@ -94,4 +89,16 @@ export class FoodListComponent implements OnInit, AfterViewInit {
         this.items = food.food;
       });
   }
+ 
+  onUpdateItems(newItems: Item[]) {
+    console.log(newItems);
+    var food = {"food": newItems};
+    this.foodService.updateFoodData(food)
+      .subscribe(resp => {
+//         const keys = resp.headers.keys();
+//         this.headers = keys.map(key =>
+//           `${key}: ${resp.headers.get(key)}`);
+      });
+  }
+
 }

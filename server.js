@@ -9,14 +9,20 @@ const app = express();
 // requests
 function requestHandler(req, res, next) {
   log.debug('Inbound request:', req.method, req.originalUrl);
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers','*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
   res.setHeader('Cache-Control', 'no-cache');
   next();
 }
 
 function requestPage(req, res) {
-  log.debug('Inbound request:', req.method, req.originalUrl);
+  log.debug('Inbound page request:', req.method, req.originalUrl);
   res.sendFile(`${__dirname}/index.html`);
+}
+
+function update(req, res) {
+  console.log(req);
 }
 
 // initialize app server

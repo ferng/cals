@@ -12,7 +12,7 @@ import { MatTable } from '@angular/material';
 export class ItemEditComponent implements OnInit {
   @Input() items: Item[];
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
-  @Output() updateItems = new EventEmitter<iItem[]>();
+  @Output() updateItems = new EventEmitter<Item[]>();
   
   displayedColumns: string[] = ['name', 'cal', 'action'];
 
