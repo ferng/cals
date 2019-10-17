@@ -48,8 +48,15 @@ router.get('/*', (req, res) => {
 
 
 router.put('/*', (req, res) => {
-   console.log(req.body);
-  res.status(200).send('');
+  let data = req.body;
+  file.write("calories.json",data)
+    .then(() => {
+      res.status(200).send('');
+    })
+    .catch((err) => {
+      log.error(err);
+      res.status(500).send('');
+    });
 })
 
 

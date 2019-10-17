@@ -15,6 +15,21 @@ const read = (path) =>
     })
   });
 
+const write = (path, data) =>
+  new Promise((resolve, reject) => {
+    let stringified = JSON.stringify(data);
+    fs.writeFile(path, stringified, (err, buffer) => {
+      if (err) {
+        log.error(`Could not write to file ${path}`);
+        reject(err);
+        return;
+      }
+      log.debug(`Saved data ${stringified}`);
+      resolve();
+    })
+  });
+
 module.exports = {
   read,
+  write,
 };
