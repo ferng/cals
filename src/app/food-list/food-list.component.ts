@@ -24,7 +24,6 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   totalCals: number;
   displayList: boolean;
   displayEditList: boolean;
-  displayEditor: boolean;
 
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
   displayedColumns: string[] = ['name', 'cal'];
@@ -38,7 +37,6 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     this.itemCals = new Map<number, number>();
     this.displayList = true;
     this.displayEditList = false;
-    this.displayEditor = false;
   }
 
   ngAfterViewInit() {}
@@ -62,26 +60,18 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   editItems() {
     this.displayList = false;
     this.displayEditList = true;
-    this.displayEditor = false;
   }
 
 
   listItems() {
     this.displayList = true;
     this.displayEditList = false;
-    this.displayEditor = false;
-  }
-
-  openEditor(editItem: Item) {
-    console.log(editItem);
-    this.displayList = false;
-    this.displayEditList = false;
-    this.displayEditor = true;
   }
 
   loadFoodResponse() {
     this.foodService.getFoodResponse()
       .subscribe(resp => {
+        //TODO warning if there is an errror
         const keys = resp.headers.keys();
         this.headers = keys.map(key =>
           `${key}: ${resp.headers.get(key)}`);
@@ -95,9 +85,7 @@ export class FoodListComponent implements OnInit, AfterViewInit {
     var food = {"food": newItems};
     this.foodService.updateFoodData(food)
       .subscribe(resp => {
-//         const keys = resp.headers.keys();
-//         this.headers = keys.map(key =>
-//           `${key}: ${resp.headers.get(key)}`);
+        //TODO warning if there is an errror
       });
   }
 

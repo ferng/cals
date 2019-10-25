@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 import { AppComponent } from './app.component';
 import { FoodItemComponent } from './food-item/food-item.component';
@@ -34,6 +35,7 @@ import { FoodEditorComponent } from './food-editor/food-editor.component';
     MatListModule,
     MatIconModule,
     MatDialogModule,
+    MatBottomSheetModule,
   ],
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { FoodEditorComponent } from './food-editor/food-editor.component';
     FoodEditorComponent,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ],
+  entryComponents: [ FoodEditorComponent ]
 })
 export class AppModule { }
 

@@ -1,1 +1,18 @@
-<p>food-editor works!</p>
+<div *ngIf="item">
+  <form [formGroup]="foodForm">
+    <div>
+    	<mat-form-field class="food-edit-field" appearance="standard" >
+  	  	<input matInput placeholder="name" formControlName="name">
+    	</mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="food-edit-field" appearance="standard">
+  				<input matInput type="tel" placeholder="calories" formControlName="cal">
+      </mat-form-field>
+    </div>
+  </form>
+  <div>
+    <button mat-raised-button (click)="save()" color="primary">Save</button>
+    <button mat-raised-button (click)="cancel()" color="warn">Cancel</button>
+  </div>
+</div>
