@@ -15,6 +15,7 @@ export class ItemEditComponent implements OnInit {
   @Input() items: Item[];
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
   @Output() updateItems = new EventEmitter<Item[]>();
+  @Output() exitEditList = new EventEmitter<any>();
   
   displayedColumns: string[] = ['name', 'cal', 'action'];
   constructor(private _bottomSheet: MatBottomSheet) {}
@@ -33,9 +34,19 @@ export class ItemEditComponent implements OnInit {
   }
 
   editItem(id) {
+    var item = this.items[id];
+    this.displayEditItemSheet(item);
+  }
+
+  newItem() {
+    var item = {"id": 0, "name": undefined, "cal": undefined};
+    this.displayEditItemSheet(item);
+  }
+
+  displayEditItemSheet(item) {
     const bottomSheetRef = this._bottomSheet.open(FoodEditorComponent, {
       data: {
-        item: this.items[id],
+        item: item,
       }
     });
     bottomSheetRef.afterDismissed().subscribe((item: Item) => {
@@ -44,7 +55,7 @@ export class ItemEditComponent implements OnInit {
       }
     });
   }
-  
+
   updateItem(item: Item) {
     const id = item.id;
     if (id === 0) {
@@ -59,8 +70,11 @@ export class ItemEditComponent implements OnInit {
       }
     }
     this.table.renderRows();
-    console.log(this.items);
-    //this.updateItems.emit(this.items);
+    this.updateItems.emit(this.items);
+  }
+
+  exit() {
+    this.exitEditList.emit();
   }
  
 }

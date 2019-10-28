@@ -23,12 +23,9 @@
   <app-item-edit
         #editItem
         (updateItems)="onUpdateItems($event)"
+        (exitEditList)="listItems()"
         [items]='items'>
   </app-item-edit>
-  <div>
-    <button mat-raised-button (click)="newItem()" color="primary">New</button>
-    <button mat-raised-button (click)="listItems()" color="warn">OK</button>
-  </div>
 </div>
 <div *ngIf="displayEditor">
   hello

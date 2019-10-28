@@ -22,5 +22,9 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <div>
+    <button mat-raised-button (click)="newItem()" color="primary">New</button>
+    <button mat-raised-button (click)="exit()" color="warn">OK</button>
+  </div>
 
 <p *ngIf="error" class="error">{{error | json}}</p>
