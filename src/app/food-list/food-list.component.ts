@@ -83,10 +83,11 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   onUpdateItems(newItems: Item[]) {
     console.log(newItems);
     var food = {"food": newItems};
-//     this.foodService.updateFoodData(food)
-//       .subscribe(resp => {
+    this.items = newItems;
+    this.foodService.updateFoodData(food)
+      .subscribe(resp => {
         //TODO warning if there is an errror
-//       });
+      });
   }
 
 }

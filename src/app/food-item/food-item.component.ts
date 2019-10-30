@@ -16,9 +16,9 @@ export class FoodItemComponent implements OnInit {
   ngOnInit () { }
 
 	foodForm = this.fb.group({
-    id : [''],
-		grams : [''],
-		cals : [''],
+    id : [],
+    grams : [''],
+    cals : [],
 	});	
 
 	newSelection() {
