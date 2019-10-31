@@ -15,6 +15,16 @@ export interface Item {
   cal: number;
 }
 
+export function itemIdx(items: any, id: number) {
+  let idx = 0;
+  for (;idx < items.length; idx++) {
+    if (items[idx].id === id) {
+      break
+    }
+  }
+  return idx;
+}
+
 @Injectable({
   providedIn: 'root'
 })

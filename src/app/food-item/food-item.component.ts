@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { Item } from '../food-list/food-list.service';
+import { Item, itemIdx } from '../food-list/food-list.service';
 
 @Component({
   selector: 'app-food-item',
@@ -34,7 +34,8 @@ export class FoodItemComponent implements OnInit {
   }
 
   updateCals() {
-    const selected = this.items[this.foodForm.value.id]
+    const id = Number.parseInt(this.foodForm.value.id, 10)
+    const selected = this.items[itemIdx(this.items, id)]
     const grams = this.foodForm.value.grams;
     const cals = this.foodForm.value.cals;
  
@@ -46,7 +47,8 @@ export class FoodItemComponent implements OnInit {
   }
   
   updateGrams() {
-    const selected = this.items[this.foodForm.value.id]
+    const id = Number.parseInt(this.foodForm.value.id, 10)
+    const selected = this.items[itemIdx(this.items, id)]
     const grams = this.foodForm.value.grams;
     const cals = this.foodForm.value.cals;
  
@@ -69,5 +71,4 @@ export class FoodItemComponent implements OnInit {
   notBlank(data: string) {
     return (data !== null && data !== undefined && data !== "");
   }
-
 }

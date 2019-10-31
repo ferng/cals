@@ -1,4 +1,17 @@
-<div *ngIf="displayList">
+<div style="text-align:center">
+  <h2>
+    onaka ga suita!    
+  </h2>
+</div>
+<div style="text-align:center" *ngIf="displayList">
+  <div [id]="totalCals" [ngClass]="{
+    'cals-below': totalsCals <= 300,
+    'cals-above': totalCals > 300
+    }"> 
+    <h3>
+      calories: {{totalCals}}
+    </h3>
+  </div>
   <app-food-item
         #foodItem
         *ngFor="let current of counter"
@@ -6,14 +19,6 @@
         (calcCals)="onCalcCals($event)"
         [id]="'ingredient-'+current">
   </app-food-item>
-  <div [id]="totalCals" [ngClass]="{
-    'cals-below': totalsCals <= 300,
-    'cals-above': totalCals > 300
-    }"> 
-    <h3>
-      {{totalCals}}
-    </h3>
-  </div>
   <div>
     <button mat-raised-button (click)="editItems()" color="primary">Edit</button>
     <button mat-stroked-button (click)="clearItems()" color="primary">Clear</button>
@@ -26,7 +31,4 @@
         (exitEditList)="listItems()"
         [items]='items'>
   </app-item-edit>
-</div>
-<div *ngIf="displayEditor">
-  hello
 </div>

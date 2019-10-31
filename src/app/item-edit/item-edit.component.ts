@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 import { MatTable } from '@angular/material';
 
-import { Item } from '../food-list/food-list.service';
+import { Item, itemIdx } from '../food-list/food-list.service';
 import { FoodEditorComponent } from '../food-editor/food-editor.component';
 
 @Component({
@@ -23,24 +23,15 @@ export class ItemEditComponent implements OnInit {
   ngOnInit() { }
 
   deleteItem(id) {
-    for (let i = 0; i < this.items.length; i++){
-      if (this.items[i].id === id) {
-        this.items.splice(i, 1);
-        break;
-      }
-    }
+    const idx = itemIdx(this.items, id);
+    this.items.splice(idx, 1);
     this.table.renderRows();
     this.updateItems.emit(this.items);
   }
 
   editItem(id) {
-    var item;
-    for (let i = 0; i < this.items.length; i++){
-      if (this.items[i].id === id) {
-        item = this.items[i];
-        break;
-      }
-    }
+    const idx = itemIdx(this.items, id);
+    var item = this.items[idx];
     this.displayEditItemSheet(item);
   }
 
@@ -68,12 +59,8 @@ export class ItemEditComponent implements OnInit {
       item.id = Date.now();
       this.items.push(item);
     } else { 
-      for (let i = 0; i < this.items.length; i++){
-        if (this.items[i].id === id) {
-          this.items.splice(i, 1, item);
-          break;
-        }
-      }
+      const idx = itemIdx(this.items, id);
+      this.items.splice(idx, 1, item);
     }
     this.table.renderRows();
     this.updateItems.emit(this.items);
