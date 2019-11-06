@@ -81,7 +81,7 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   }
  
   onUpdateItems(newItems: Item[]) {
-    console.log(newItems);
+    this.sortItems(newItems);
     var food = {"food": newItems};
     this.items = newItems;
     this.foodService.updateFoodData(food)
@@ -90,4 +90,13 @@ export class FoodListComponent implements OnInit, AfterViewInit {
       });
   }
 
+  sortItems(items: Item[]) {
+    items.sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+  }
 }

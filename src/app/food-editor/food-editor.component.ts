@@ -35,7 +35,7 @@ export class FoodEditorComponent implements OnInit {
   }
 
   save() {
-    this.item.name = this.foodForm.value.name;
+    this.item.name = this.foodForm.value.name.toLowerCase();
     this.item.cal = Number.parseInt(this.foodForm.value.cal, 10);
     this._bottomSheetRef.dismiss(this.item);
   }
