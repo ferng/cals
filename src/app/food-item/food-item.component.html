@@ -1,7 +1,9 @@
 <div>
   <span *ngIf="items">
     <form [formGroup]="foodForm">
-      <app-field-select>
+      <app-field-select
+        [fields]='items'
+        (updateSelection)='newSelection($event)'>
       </app-field-select>
 <!--      <mat-form-field class="food-item-list" appearance="standard">
         <mat-label>select food</mat-label>

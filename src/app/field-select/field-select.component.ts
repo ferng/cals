@@ -1,12 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-interface Field {
-  name: string;
-}
+import { Item } from '../food-list/food-list.service';
 
 @Component({
   selector: 'app-field-select',
@@ -14,11 +12,13 @@ interface Field {
   styleUrls: ['./field-select.component.css']
 })
 export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input() fields ;
+  @Output() updateSelection = new EventEmitter<any>();
 
-  fields: Field[] = [{"name": "hello"}, {"name": "bye"}, {"name": "what"}];
+//   fields: Field[] = [{"name": "hello"}, {"name": "bye"}, {"name": "what"}];
   fieldCtrl: FormControl = new FormControl();
   fieldFilterCtrl: FormControl = new FormControl();
-  filteredFields: ReplaySubject<Field[]> = new ReplaySubject<Field[]>(1);
+  filteredFields: ReplaySubject<Item[]> = new ReplaySubject<Item[]>(1);
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
@@ -27,11 +27,17 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
+//     console.log(this.items);
     // set initial selection
-    this.fieldCtrl.setValue(this.fields[0]);
+//     this.fieldCtrl.setValue(this.fields[0]);
 
     // load the initial bank list
     this.filteredFields.next(this.fields.slice());
+
+    this.fieldCtrl.valueChanges
+      .subscribe((val) => {
+        this.updateSelection.emit(val);
+      });
 
     // listen for search field value changes
     this.fieldFilterCtrl.valueChanges
@@ -42,7 +48,7 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.setInitialValue();
+//     this.setInitialValue();
   }
 
   ngOnDestroy() {
@@ -50,30 +56,33 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
     this._onDestroy.complete();
   }
 
+  newSelection() {
+    console.log(777);
+  }
+
   protected setInitialValue() {
   this.filteredFields
     .pipe(take(1), takeUntil(this._onDestroy))
     .subscribe(() => {
-      this.singleSelect.compareWith = (a: Field, b: Field) => a && b && a.name === b.name;
+      this.singleSelect.compareWith = (a: Item, b: Item) => a && b && a.name === b.name;
     });
   }
 
   protected filterFields() {
-  if (!this.fields) {
-    return;
+    if (!this.fields) {
+      return;
+    }
+    // get the search keyword
+    let search = this.fieldFilterCtrl.value;
+    if (!search) {
+      this.filteredFields.next(this.fields.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filteredFields.next(
+      this.fields.filter(field => field.name.toLowerCase().indexOf(search) > -1)
+    );
   }
-  // get the search keyword
-  let search = this.fieldFilterCtrl.value;
-  if (!search) {
-    this.filteredFields.next(this.fields.slice());
-    return;
-  } else {
-    search = search.toLowerCase();
-  }
-  // filter the banks
-  this.filteredFields.next(
-    this.fields.filter(field => field.name.toLowerCase().indexOf(search) > -1)
-  );
-  }
-
 }

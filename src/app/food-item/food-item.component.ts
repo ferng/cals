@@ -23,8 +23,11 @@ export class FoodItemComponent implements OnInit {
     cals : [],
 	});	
 
-	newSelection() {
-		this.updateCals();
+	newSelection(val) {
+    this.foodForm.value.id = val.id;
+    this.foodForm.setValue(this.foodForm.value);
+    this.updateCals();
+    console.log(val);
 	}
 
 	calcCalsFromGrams() {
