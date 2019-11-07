@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+
 import { Item, itemIdx } from '../food-list/food-list.service';
+import { FieldSelectComponent } from '../field-select/field-select.component';
 
 @Component({
   selector: 'app-food-item',
