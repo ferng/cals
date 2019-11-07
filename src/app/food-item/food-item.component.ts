@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 import { Item, itemIdx } from '../food-list/food-list.service';
@@ -12,6 +12,7 @@ import { FieldSelectComponent } from '../field-select/field-select.component';
 export class FoodItemComponent implements OnInit {
   @Input() items: Item[];
   @Output() calcCals = new EventEmitter<Item>();
+  @ViewChild('fieldSelect', {static: false}) fieldSelect: FieldSelectComponent;
 
   constructor(private fb: FormBuilder) { }
 
@@ -27,7 +28,6 @@ export class FoodItemComponent implements OnInit {
     this.foodForm.value.id = val.id;
     this.foodForm.setValue(this.foodForm.value);
     this.updateCals();
-    console.log(val);
 	}
 
 	calcCalsFromGrams() {
@@ -71,6 +71,7 @@ export class FoodItemComponent implements OnInit {
 
   clearItem() {
     this.foodForm.reset();
+    this.fieldSelect.clearSelection();
   };
 
   notBlank(data: string) {

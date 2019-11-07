@@ -2,6 +2,7 @@
   <span *ngIf="items">
     <form [formGroup]="foodForm">
       <app-field-select
+        #fieldSelect
         [fields]='items'
         (updateSelection)='newSelection($event)'>
       </app-field-select>

@@ -47,17 +47,18 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
+  clearSelection() {
+    console.log(this.fieldCtrl);
+     this.fieldCtrl.setValue(null);
+  }
+
   ngAfterViewInit() {
-//     this.setInitialValue();
+    this.setInitialValue();
   }
 
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
-  }
-
-  newSelection() {
-    console.log(777);
   }
 
   protected setInitialValue() {

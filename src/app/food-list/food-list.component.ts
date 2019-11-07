@@ -25,7 +25,7 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   displayList: boolean;
   displayEditList: boolean;
 
-  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
+  @ViewChild(MatTable, { static:true }) table: MatTable<any>;
   displayedColumns: string[] = ['name', 'cal'];
 
   constructor(private foodService: FoodService) { }
