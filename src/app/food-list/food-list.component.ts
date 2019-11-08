@@ -75,14 +75,23 @@ export class FoodListComponent implements OnInit, AfterViewInit {
         const keys = resp.headers.keys();
         this.headers = keys.map(key =>
           `${key}: ${resp.headers.get(key)}`);
-        var food = { ... resp.body };
+        let food = { ... resp.body };
         this.items = food.food;
       });
   }
  
   onUpdateItems(newItems: Item[]) {
+    let updatedItemCals = new Map();
+    newItems.forEach((item) => {
+      let existing = this.itemCals.get(item.id);
+      if (existing) {
+        updatedItemCals.set(item.id, existing);
+      }
+    })
+    this.itemCals = updatedItemCals;
+    
     this.sortItems(newItems);
-    var food = {"food": newItems};
+    let food = {"food": newItems};
     this.items = newItems;
     this.foodService.updateFoodData(food)
       .subscribe(resp => {

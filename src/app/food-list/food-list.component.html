@@ -17,7 +17,8 @@
         *ngFor="let current of counter"
         [items]='items'
         (calcCals)="onCalcCals($event)"
-        [id]="'ingredient-'+current">
+        [id]='current'
+        [curCals]='itemCals'>
   </app-food-item>
   <div>
     <button mat-raised-button (click)="editItems()" color="primary">Edit</button>

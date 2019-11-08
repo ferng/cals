@@ -11,12 +11,19 @@ import { FieldSelectComponent } from '../field-select/field-select.component';
 })
 export class FoodItemComponent implements OnInit {
   @Input() items: Item[];
+  @Input() curCals: Map<number, number>;
+  @Input() id: number;
   @Output() calcCals = new EventEmitter<Item>();
   @ViewChild('fieldSelect', {static: false}) fieldSelect: FieldSelectComponent;
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit () { }
+  ngOnInit () { 
+    if (this.items && this.id < this.curCals.size) {
+      let entries = Array.from(this.curCals);
+      this.reApplyVal(entries[this.id][0], entries[this.id][1]);
+    }
+  }
 
 	foodForm = this.fb.group({
     id : [],
@@ -25,9 +32,11 @@ export class FoodItemComponent implements OnInit {
 	});	
 
 	newSelection(val) {
-    this.foodForm.value.id = val.id;
-    this.foodForm.setValue(this.foodForm.value);
-    this.updateCals();
+    if (val) {
+      this.foodForm.value.id = val.id;
+      this.foodForm.setValue(this.foodForm.value);
+      this.updateCals();
+    }
 	}
 
 	calcCalsFromGrams() {
@@ -71,8 +80,16 @@ export class FoodItemComponent implements OnInit {
 
   clearItem() {
     this.foodForm.reset();
-    this.fieldSelect.clearSelection();
+    this.fieldSelect.resetSelection(null);
   };
+
+  reApplyVal(id: number, cals: number) {
+    this.foodForm.value.id = id;
+    this.foodForm.value.cals = cals;
+    this.updateGrams();
+//     this.fieldSelect.resetSelection(id);
+//     this.foodForm.setValue(this.foodForm.value);
+  }
 
   notBlank(data: string) {
     return (data !== null && data !== undefined && data !== "");

@@ -4,7 +4,8 @@
       <app-field-select
         #fieldSelect
         [fields]='items'
-        (updateSelection)='newSelection($event)'>
+        (updateSelection)='newSelection($event)'
+        [selectionId]='foodForm.value.id'>
       </app-field-select>
 <!--      <mat-form-field class="food-item-list" appearance="standard">
         <mat-label>select food</mat-label>

@@ -12,7 +12,8 @@ import { Item } from '../food-list/food-list.service';
   styleUrls: ['./field-select.component.css']
 })
 export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() fields ;
+  @Input() fields;
+  @Input() selectionId: number;
   @Output() updateSelection = new EventEmitter<any>();
 
 //   fields: Field[] = [{"name": "hello"}, {"name": "bye"}, {"name": "what"}];
@@ -27,6 +28,7 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
+    this.resetSelection(this.selectionId);
 //     console.log(this.items);
     // set initial selection
 //     this.fieldCtrl.setValue(this.fields[0]);
@@ -47,9 +49,17 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  clearSelection() {
-    console.log(this.fieldCtrl);
-     this.fieldCtrl.setValue(null);
+  resetSelection(id) {
+    if (id === null) {
+      this.fieldCtrl.setValue(null);
+    } else {
+      for(let i=0; i < this.fields.length; i++) {
+        let field = this.fields[i];
+        if (field.id === id) {
+          this.fieldCtrl.setValue(field);
+        }
+      }
+    }
   }
 
   ngAfterViewInit() {
