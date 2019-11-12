@@ -28,7 +28,7 @@ export function itemIdx(items: any, id: number) {
 @Injectable({
   providedIn: 'root'
 })
-export class FoodService {
+export class FoodListService {
   foodUrl = 'http://localhost:3000/api/cals';
 
   constructor(private http: HttpClient) { }

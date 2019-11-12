@@ -1,0 +1,29 @@
+import { TestBed } from '@angular/core/testing';
+
+import { HttpClient } from '@angular/common/http';
+
+import { FoodListService } from './food-list.service';
+
+describe('FoodListServicei with HttpClient', () => {
+  let foodListService: FoodListService;
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
+
+  beforeEach(() => {
+    const spy = jasmine.createSpyObj('HttpClient', ['get']);
+    
+    TestBed.configureTestingModule({
+      providers: [
+        FoodListService,
+        { provide: httpClientSpy, useValue: spy}
+      ]
+    });
+
+    foodListService = TestBed.get(FoodListService);
+    httpClientSpy = TestBed.get(HttpClient);
+  });
+
+  it('should be created', () => {
+    const service: FoodListService = TestBed.get(FoodListService);
+    expect(service).toBeTruthy();
+  });
+});

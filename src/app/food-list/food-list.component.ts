@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChildren, ViewChild } from '@angular/core';
 
-import { Food, Item, FoodService } from '../food-list/food-list.service';
+import { Food, Item, FoodListService } from '../food-list/food-list.service';
 import { FoodItemComponent } from '../food-item/food-item.component';
 
 import { MatTable } from '@angular/material';
@@ -10,7 +10,7 @@ import { MatTable } from '@angular/material';
   selector: 'app-food-list',
   templateUrl: './food-list.component.html',
   styleUrls: ['./food-list.component.css'],
-  providers: [ FoodService ]
+  providers: [ FoodListService ]
 })
 
 export class FoodListComponent implements OnInit, AfterViewInit {
@@ -28,7 +28,7 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTable, { static:true }) table: MatTable<any>;
   displayedColumns: string[] = ['name', 'cal'];
 
-  constructor(private foodService: FoodService) { }
+  constructor(private foodService: FoodListService) { }
 
   ngOnInit() {
     this.totalCals = 0;
