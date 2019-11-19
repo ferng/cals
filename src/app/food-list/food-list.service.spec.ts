@@ -9,7 +9,7 @@ describe('FoodListService with HttpClient', () => {
   function asyncData<T>(data: T) {
     return defer(() => Promise.resolve(data));
   }
-  
+
   function asyncError<T>(errorObject: any) {
     return defer(() => Promise.reject(errorObject));
   }
@@ -18,12 +18,12 @@ describe('FoodListService with HttpClient', () => {
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'put']);
     const foodListService = new FoodListService(<any> httpClientSpy);
     const items: Array<Item> = [
-      {"id": 22, "name": "onions", "cal": 33},
-      {"id": 35, "name": "potatoes", "cal": 157},
-      {"id": 87, "name": "cheese", "cal": 892},
-      {"id": 3, "name": "sarnie", "cal": 56}
+      {'id': 22, 'name': 'onions', 'cal': 33},
+      {'id': 35, 'name': 'potatoes', 'cal': 157},
+      {'id': 87, 'name': 'cheese', 'cal': 892},
+      {'id': 3, 'name': 'sarnie', 'cal': 56}
     ];
-    let food: Food = {"food": items};
+    const food: Food = {'food': items};
 
     return {httpClientSpy, foodListService, food};
   }
@@ -34,7 +34,7 @@ describe('FoodListService with HttpClient', () => {
     expect(foodListService).toBeTruthy();
   });
 
-  
+
   it('should return food from the backend', () => {
     const {httpClientSpy, foodListService, food} = setup();
 
@@ -47,14 +47,14 @@ describe('FoodListService with HttpClient', () => {
     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   });
 
-  
-  it('should return the full response from the backend', ()=> {
+
+  it('should return the full response from the backend', () => {
     const {httpClientSpy, foodListService, food} = setup();
     const response = new HttpResponse({
       status: 200,
       body: food
     });
-    
+
     httpClientSpy.get.and.returnValue(asyncData(response));
 
     foodListService.getFoodResponse().subscribe(
@@ -64,26 +64,26 @@ describe('FoodListService with HttpClient', () => {
     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   });
 
-  
-  it('should update the backend with a new list of items', ()=> {
+
+  it('should update the backend with a new list of items', () => {
     const {httpClientSpy, foodListService, food} = setup();
     const response = new HttpResponse({
       status: 200
     });
-    
+
     httpClientSpy.put.and.returnValue(asyncData(response));
 
     foodListService.updateFoodData(food).subscribe(
       foodResp => {
-        expect(foodResp.status).toEqual(200), fail
+        expect(foodResp.status).toEqual(200);
       }
     );
 
     expect(httpClientSpy.put.calls.count()).toBe(1, 'one call');
   });
 
-  
-  it('should notify user of a server error', ()=> {
+
+  it('should notify user of a server error', () => {
     const {httpClientSpy, foodListService, food} = setup();
     const errorResponse = new HttpErrorResponse({
       error: 'test 404 error',
@@ -97,9 +97,9 @@ describe('FoodListService with HttpClient', () => {
       error  => expect(error).toBe('Something bad happened: Not Found; please try again later.')
     );
   });
-  
 
-  it('should notify user of a frontend error', ()=> {
+
+  it('should notify user of a frontend error', () => {
     const {httpClientSpy, foodListService, food} = setup();
     const errorEvent = new ErrorEvent('ErrorEvent', {
       error : new Error('oops'),
@@ -118,13 +118,13 @@ describe('FoodListService with HttpClient', () => {
     );
   });
 
-  
-  it('should call itemIdx to get the index item from the array based on the id', ()=> {
+
+  it('should call itemIdx to get the index item from the array based on the id', () => {
     const {httpClientSpy, foodListService, food} = setup();
     const idx1 = itemIdx(food.food, 22);
     const idx2 = itemIdx(food.food, 87);
 
     expect(food.food[idx1].name).toBe('onions');
     expect(food.food[idx2].name).toBe('cheese');
-  })
+  });
 });

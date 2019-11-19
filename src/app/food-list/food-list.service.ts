@@ -17,13 +17,14 @@ export interface Item {
 
 export function itemIdx(items: any, id: number) {
   let idx = 0;
-  for (;idx < items.length; idx++) {
+  for (; idx < items.length; idx++) {
     if (items[idx].id === id) {
-      break
+      break;
     }
   }
   return idx;
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class FoodListService {
 
   constructor(private http: HttpClient) { }
 
-  //get json data
+  // get json data
   getFood() {
     return this.http.get<Food>(this.foodUrl)
       .pipe(
@@ -41,9 +42,9 @@ export class FoodListService {
         catchError(this.handleError)
       );
   }
-  
 
-  //get complete http response
+
+  // get complete http response
   getFoodResponse(): Observable<HttpResponse<Food>> {
     return this.http.get<Food>(this.foodUrl, { observe: 'response' })
         .pipe(
@@ -53,7 +54,7 @@ export class FoodListService {
   }
 
 
-  //send updated list of items to be saved
+  // send updated list of items to be saved
   updateFoodData(food: Food): Observable<HttpResponse<any>> {
     return this.http.put<HttpResponse<any>>(this.foodUrl, food)
         .pipe(
@@ -80,6 +81,6 @@ export class FoodListService {
     // return an observable with a user-facing error message
     return throwError(
       `Something bad happened: ${errorMsg}; please try again later.`);
-  };
+  }
 
 }
