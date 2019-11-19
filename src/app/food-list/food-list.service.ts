@@ -54,28 +54,32 @@ export class FoodListService {
 
 
   //send updated list of items to be saved
-  updateFoodData(food: Food): Observable<Food> {
-    return this.http.put<Food>(this.foodUrl, food)
+  updateFoodData(food: Food): Observable<HttpResponse<any>> {
+    return this.http.put<HttpResponse<any>>(this.foodUrl, food)
         .pipe(
           retry(3),
           catchError(this.handleError)
         );
   }
 
+
   private handleError(error: HttpErrorResponse) {
+    let errorMsg = '';
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
+      errorMsg = error.error.message;
+      console.error('An error occurred', errorMsg);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
+      errorMsg = error.statusText;
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
     return throwError(
-      'Something bad happened; please try again later.');
+      `Something bad happened: ${errorMsg}; please try again later.`);
   };
 
 }
