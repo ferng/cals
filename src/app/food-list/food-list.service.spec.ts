@@ -80,6 +80,8 @@ describe('FoodListService with HttpClient', () => {
     );
 
     expect(httpClientSpy.put.calls.count()).toBe(1, 'one call');
+
+    expect(httpClientSpy.put).toHaveBeenCalledWith('http://localhost:3000/api/cals', food);
   });
 
 

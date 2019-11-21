@@ -7,14 +7,6 @@
         (updateSelection)='newSelection($event)'
         [selectionId]='foodForm.value.id'>
       </app-field-select>
-<!--      <mat-form-field class="food-item-list" appearance="standard">
-        <mat-label>select food</mat-label>
-        <select matNativeControl formControlName="id" (change)="newSelection(this)" >
-          <option *ngFor="let item of items" [value]="item.id">
-            {{item.name}} ({{item.cal}})
-          </option>
-        </select>
-</mat-form-field> -->
     	<mat-form-field class="food-item-text" appearance="standard" >
   	  	<input matInput type="tel" placeholder="grams" formControlName="grams" (change)="calcCalsFromGrams()">
     	</mat-form-field>

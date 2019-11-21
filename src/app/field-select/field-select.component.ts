@@ -16,7 +16,6 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() selectionId: number;
   @Output() updateSelection = new EventEmitter<any>();
 
-//   fields: Field[] = [{"name": "hello"}, {"name": "bye"}, {"name": "what"}];
   fieldCtrl: FormControl = new FormControl();
   fieldFilterCtrl: FormControl = new FormControl();
   filteredFields: ReplaySubject<Item[]> = new ReplaySubject<Item[]>(1);
@@ -29,19 +28,17 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.resetSelection(this.selectionId);
-//     console.log(this.items);
-    // set initial selection
-//     this.fieldCtrl.setValue(this.fields[0]);
 
-    // load the initial bank list
+    // load the initial field list
     this.filteredFields.next(this.fields.slice());
 
+    // listen for item selection changes
     this.fieldCtrl.valueChanges
       .subscribe((val) => {
         this.updateSelection.emit(val);
       });
 
-    // listen for search field value changes
+    // listen for search field autocomplete search changes
     this.fieldFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
@@ -53,8 +50,8 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
     if (id === null) {
       this.fieldCtrl.setValue(null);
     } else {
-      for(let i=0; i < this.fields.length; i++) {
-        let field = this.fields[i];
+      for (let i = 0; i < this.fields.length; i++) {
+        const field = this.fields[i];
         if (field.id === id) {
           this.fieldCtrl.setValue(field);
         }
@@ -62,21 +59,11 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit() {
-    this.setInitialValue();
-  }
+  ngAfterViewInit() { }
 
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
-  }
-
-  protected setInitialValue() {
-  this.filteredFields
-    .pipe(take(1), takeUntil(this._onDestroy))
-    .subscribe(() => {
-      this.singleSelect.compareWith = (a: Item, b: Item) => a && b && a.name === b.name;
-    });
   }
 
   protected filterFields() {
@@ -91,7 +78,7 @@ export class FieldSelectComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       search = search.toLowerCase();
     }
-    // filter the banks
+    // filter the fields
     this.filteredFields.next(
       this.fields.filter(field => field.name.toLowerCase().indexOf(search) > -1)
     );
