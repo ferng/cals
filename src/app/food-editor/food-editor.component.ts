@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material';
-import { MAT_BOTTOM_SHEET_DATA } from '@angular/material'
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 import { Item } from '../food-list/food-list.service';
@@ -10,7 +10,7 @@ import { Item } from '../food-list/food-list.service';
   templateUrl: './food-editor.component.html',
   styleUrls: ['./food-editor.component.css']
 })
-export class FoodEditorComponent implements OnInit {
+export class FoodEditorComponent {
   item: Item;
 
   constructor(
@@ -21,14 +21,11 @@ export class FoodEditorComponent implements OnInit {
     this.item = data.item;
   }
 
-  ngOnInit() {
-  }
-
-	foodForm = this.fb.group({
-		name : [this.data.item.name],
-		cal : [this.data.item.cal],
+  foodForm = this.fb.group({
+    name : [this.data.item.name],
+    cal : [this.data.item.cal],
     id: [this.data.item.id]
-	});
+  });
 
   cancel() {
     this._bottomSheetRef.dismiss();
@@ -39,5 +36,4 @@ export class FoodEditorComponent implements OnInit {
     this.item.cal = Number.parseInt(this.foodForm.value.cal, 10);
     this._bottomSheetRef.dismiss(this.item);
   }
-
 }

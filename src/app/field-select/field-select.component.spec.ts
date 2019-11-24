@@ -34,7 +34,6 @@ describe('FieldSelectComponent', () => {
       schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
-
   }));
 
   beforeEach(() => {
