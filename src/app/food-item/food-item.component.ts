@@ -16,82 +16,84 @@ export class FoodItemComponent implements OnInit {
   @Output() calcCals = new EventEmitter<Item>();
   @ViewChild('fieldSelect', {static: false}) fieldSelect: FieldSelectComponent;
 
+  foodForm = this.fb.group({
+    id : [],
+    grams : [''],
+    cals : [],
+    });
+
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit () { 
+  ngOnInit () {
     if (this.items && this.id < this.curCals.size) {
-      let entries = Array.from(this.curCals);
+      const entries = Array.from(this.curCals);
       this.reApplyVal(entries[this.id][0], entries[this.id][1]);
     }
   }
 
-	foodForm = this.fb.group({
-    id : [],
-    grams : [''],
-    cals : [],
-	});	
-
-	newSelection(val) {
+  newSelection(val) {
     if (val) {
       this.foodForm.value.id = val.id;
       this.foodForm.setValue(this.foodForm.value);
       this.updateCals();
     }
-	}
+  }
 
-	calcCalsFromGrams() {
+  calcCalsFromGrams() {
     this.updateCals();
-	}
- 
+  }
+
   calcGramsFromCals() {
     this.updateGrams();
   }
 
   updateCals() {
-    const id = Number.parseInt(this.foodForm.value.id, 10)
-    const selected = this.items[itemIdx(this.items, id)]
+    const id = Number.parseInt(this.foodForm.value.id, 10);
+    const selected = this.items[itemIdx(this.items, id)];
     const grams = this.foodForm.value.grams;
     const cals = this.foodForm.value.cals;
- 
+
     if (this.notBlank(grams)) {
-      this.foodForm.value.cals = Math.ceil((selected.cal / 100) * Number.parseInt(grams));
-      this.notifyParent(this.foodForm.value.cals);
-      this.foodForm.setValue(this.foodForm.value);
-    }
-  }
-  
-  updateGrams() {
-    const id = Number.parseInt(this.foodForm.value.id, 10)
-    const selected = this.items[itemIdx(this.items, id)]
-    const grams = this.foodForm.value.grams;
-    const cals = this.foodForm.value.cals;
- 
-    if (this.notBlank(cals)) {
-      this.foodForm.value.grams = Math.floor((Number.parseInt(cals) / selected.cal) * 100);
-      this.notifyParent(this.foodForm.value.cals);
+      this.foodForm.value.cals = Math.ceil((selected.cal / 100) * Number.parseInt(grams, 10));
+      this.notifyParent();
       this.foodForm.setValue(this.foodForm.value);
     }
   }
 
-  notifyParent(selCal) {
-    const updated = {"id": Number.parseInt(this.foodForm.value.id,10), "name": this.foodForm.value.name, "cal": Number.parseInt(this.foodForm.value.cals, 10)};
+  updateGrams() {
+    const id = Number.parseInt(this.foodForm.value.id, 10);
+    const selected = this.items[itemIdx(this.items, id)];
+    const grams = this.foodForm.value.grams;
+    const cals = this.foodForm.value.cals;
+
+    if (this.notBlank(cals)) {
+      this.foodForm.value.grams = Math.floor((Number.parseInt(cals, 10) / selected.cal) * 100);
+      this.notifyParent();
+      this.foodForm.setValue(this.foodForm.value);
+    }
+  }
+
+  notifyParent() {
+    const updated = {
+      'id': Number.parseInt(this.foodForm.value.id, 10),
+      'name': undefined,
+      'cal': Number.parseInt(this.foodForm.value.cals, 10)
+    };
     this.calcCals.emit(updated);
   }
 
   clearItem() {
     this.foodForm.reset();
     this.fieldSelect.resetSelection(null);
-  };
+  }
 
   reApplyVal(id: number, cals: number) {
     this.foodForm.value.id = id;
     this.foodForm.value.cals = cals;
     this.updateGrams();
-//     this.fieldSelect.resetSelection(id);
-//     this.foodForm.setValue(this.foodForm.value);
   }
 
   notBlank(data: string) {
-    return (data !== null && data !== undefined && data !== "");
+    return (data !== null && data !== undefined && data !== '');
   }
 }

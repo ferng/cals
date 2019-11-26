@@ -14,7 +14,6 @@ describe('FoodEditorComponent', () => {
   let formBuilder: FormBuilder;
   let testFields: Item[];
 
-
   beforeAll(() => {
     testFields = [
       {'id': 22, 'name': 'onions', 'cal': 33},
