@@ -3,7 +3,7 @@ import { Component, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 import { FoodItemComponent } from './food-item.component';
-import { Item, itemIdx } from '../food-list/food-list.service';
+import { Item } from '../food-list/food-list.service';
 import { FieldSelectComponent } from '../field-select/field-select.component';
 
 @Component({

@@ -35,7 +35,7 @@ export class FoodListService {
   constructor(private http: HttpClient) { }
 
   // get json data
-  getFood() {
+  getFood(): Observable<Food> {
     return this.http.get<Food>(this.foodUrl)
       .pipe(
         retry(3),

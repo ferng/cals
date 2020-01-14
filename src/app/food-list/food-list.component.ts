@@ -13,7 +13,7 @@ import { MatTable } from '@angular/material';
   providers: [ FoodListService ]
 })
 
-export class FoodListComponent implements OnInit, AfterViewInit {
+export class FoodListComponent implements OnInit {
   @ViewChildren('foodItem') itemRefs;
 
   error: any;
@@ -25,21 +25,21 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   displayList: boolean;
   displayEditList: boolean;
 
-  @ViewChild(MatTable, { static:true }) table: MatTable<any>;
+  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
   displayedColumns: string[] = ['name', 'cal'];
 
-  constructor(private foodService: FoodListService) { }
+  constructor(
+    private foodService: FoodListService
+  ) { }
 
   ngOnInit() {
     this.totalCals = 0;
     this.loadFoodResponse();
-    this.counter = Array(7).fill(0).map((x,i)=>i);
+    this.counter = Array(7).fill(0).map((x, i) => i);
     this.itemCals = new Map<number, number>();
     this.displayList = true;
     this.displayEditList = false;
   }
-
-  ngAfterViewInit() {}
 
   onCalcCals(calcCals: Item) {
     let totalCals = 0;
@@ -52,7 +52,7 @@ export class FoodListComponent implements OnInit, AfterViewInit {
 
   clearItems() {
     this.itemRefs.forEach((item) => {
-      item.clearItem();       
+      item.clearItem();
     });
     this.totalCals = 0;
   }
@@ -71,31 +71,31 @@ export class FoodListComponent implements OnInit, AfterViewInit {
   loadFoodResponse() {
     this.foodService.getFoodResponse()
       .subscribe(resp => {
-        //TODO warning if there is an errror
+        // TODO warning if there is an errror
         const keys = resp.headers.keys();
         this.headers = keys.map(key =>
           `${key}: ${resp.headers.get(key)}`);
-        let food = { ... resp.body };
+        const food = { ... resp.body };
         this.items = food.food;
       });
   }
- 
+
   onUpdateItems(newItems: Item[]) {
-    let updatedItemCals = new Map();
+    const updatedItemCals = new Map();
     newItems.forEach((item) => {
-      let existing = this.itemCals.get(item.id);
+      const existing = this.itemCals.get(item.id);
       if (existing) {
         updatedItemCals.set(item.id, existing);
       }
-    })
+    });
     this.itemCals = updatedItemCals;
-    
+
     this.sortItems(newItems);
-    let food = {"food": newItems};
+    const food = {'food': newItems};
     this.items = newItems;
     this.foodService.updateFoodData(food)
       .subscribe(resp => {
-        //TODO warning if there is an errror
+        // TODO warning if there is an errror
       });
   }
 

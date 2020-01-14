@@ -11,7 +11,6 @@ describe('FoodEditorComponent', () => {
   let component: FoodEditorComponent;
   let fixture: ComponentFixture<FoodEditorComponent>;
   let bottomSheetSpy: MatBottomSheetRef<FoodEditorComponent>;
-  let formBuilder: FormBuilder;
   let testFields: Item[];
 
   beforeAll(() => {
@@ -26,7 +25,6 @@ describe('FoodEditorComponent', () => {
 
   beforeEach(async(() => {
     bottomSheetSpy = jasmine.createSpyObj('MatBottomSheetRef', ['dismiss']);
-    formBuilder = new FormBuilder();
     TestBed.configureTestingModule({
       declarations: [ FoodEditorComponent ],
       providers: [

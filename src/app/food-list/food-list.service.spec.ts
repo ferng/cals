@@ -1,19 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { defer } from 'rxjs';
 
 import { FoodListService, Item, Food, itemIdx } from './food-list.service';
 
+import { asyncData, asyncError} from '../spec-helper';
+
 describe('FoodListService with HttpClient', () => {
-  function asyncData<T>(data: T) {
-    return defer(() => Promise.resolve(data));
-  }
-
-  function asyncError<T>(errorObject: any) {
-    return defer(() => Promise.reject(errorObject));
-  }
-
   function setup() {
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'put']);
     const foodListService = new FoodListService(<any> httpClientSpy);
