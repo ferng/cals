@@ -11,17 +11,17 @@ import { FoodEditorComponent } from '../food-editor/food-editor.component';
   templateUrl: './item-edit.component.html',
   styleUrls: ['./item-edit.component.css']
 })
-export class ItemEditComponent implements OnInit {
+export class ItemEditComponent {
   @Input() items: Item[];
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
   @Output() updateItems = new EventEmitter<Item[]>();
   @Output() exitEditList = new EventEmitter<any>();
   
   displayedColumns: string[] = ['name', 'cal', 'action'];
-  constructor(private _bottomSheet: MatBottomSheet) {}
+  constructor(
+    private _bottomSheet: MatBottomSheet
+  ) {}
   
-  ngOnInit() { }
-
   deleteItem(id) {
     const idx = itemIdx(this.items, id);
     this.items.splice(idx, 1);

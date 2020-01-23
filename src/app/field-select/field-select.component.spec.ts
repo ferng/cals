@@ -69,7 +69,6 @@ describe('FieldSelectComponent', () => {
     hostComponent.fieldSelectComponent.fieldCtrl.patchValue(3);
 
     expect(eventEmitterSpy.emit).toHaveBeenCalledWith(3);
-
   });
 
 

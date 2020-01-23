@@ -64,10 +64,6 @@ describe('FoodListComponent', () => {
     fixture.detectChanges();
   });
 
-// afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
-//   httpMock.verify();
-// }));
-
 
   it('should set up component via ngOnInit()',
     inject ([HttpTestingController], (httpMock: HttpTestingController) => {
@@ -79,7 +75,6 @@ describe('FoodListComponent', () => {
       const req = httpMock.expectOne('http://localhost:3000/api/cals');
       expect(req.request.method).toEqual('GET');
       req.flush(food);
-
     })
   );
 

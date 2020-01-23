@@ -3,6 +3,7 @@
 *.swp
 tags
 .vscode
+*.sess
 
 #build
 dist
@@ -53,4 +54,4 @@ testem.log
 
 # System Files
 .DS_Store
-Thumbs.db
+Thumb.db
