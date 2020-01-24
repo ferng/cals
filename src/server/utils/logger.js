@@ -14,7 +14,7 @@
  */
 
 const bunyan = require('bunyan');
-const config = require('../../../config.js');
+const config = require('../../../config.json');
 
 let logger;
 

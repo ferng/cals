@@ -13,15 +13,15 @@ import { FoodEditorComponent } from '../food-editor/food-editor.component';
 })
 export class ItemEditComponent {
   @Input() items: Item[];
-  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
+  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
   @Output() updateItems = new EventEmitter<Item[]>();
   @Output() exitEditList = new EventEmitter<any>();
-  
+
   displayedColumns: string[] = ['name', 'cal', 'action'];
   constructor(
     private _bottomSheet: MatBottomSheet
   ) {}
-  
+
   deleteItem(id) {
     const idx = itemIdx(this.items, id);
     this.items.splice(idx, 1);
@@ -31,12 +31,12 @@ export class ItemEditComponent {
 
   editItem(id) {
     const idx = itemIdx(this.items, id);
-    var item = this.items[idx];
+    const item = this.items[idx];
     this.displayEditItemSheet(item);
   }
 
   newItem() {
-    var item = {"id": 0, "name": undefined, "cal": undefined};
+    const item = {'id': 0, 'name': undefined, 'cal': undefined};
     this.displayEditItemSheet(item);
   }
 
@@ -46,9 +46,9 @@ export class ItemEditComponent {
         item: item,
       }
     });
-    bottomSheetRef.afterDismissed().subscribe((item: Item) => {
-      if (item) {
-        this.updateItem(item);
+    bottomSheetRef.afterDismissed().subscribe((changedItem: Item) => {
+      if (changedItem) {
+        this.updateItem(changedItem);
       }
     });
   }
@@ -58,7 +58,7 @@ export class ItemEditComponent {
     if (id === 0) {
       item.id = Date.now();
       this.items.push(item);
-    } else { 
+    } else {
       const idx = itemIdx(this.items, id);
       this.items.splice(idx, 1, item);
     }
@@ -69,5 +69,5 @@ export class ItemEditComponent {
   exit() {
     this.exitEditList.emit();
   }
- 
+
 }

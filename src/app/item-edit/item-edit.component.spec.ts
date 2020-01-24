@@ -16,7 +16,7 @@ class HostComponent {
   @ViewChild(ItemEditComponent, {static: true})
   public itemEditComponent: ItemEditComponent;
 }
-  
+
 describe('ItemEditComponent', () => {
   let hostComponent: HostComponent;
   let hostFixture: ComponentFixture<HostComponent>;
@@ -54,7 +54,7 @@ describe('ItemEditComponent', () => {
     hostComponent = hostFixture.componentInstance;
   });
 
-  
+
   it('should create the object via the constructor', () => {
     expect(hostComponent.itemEditComponent.displayedColumns[0]).toBe('name');
     expect(hostComponent.itemEditComponent.displayedColumns[1]).toBe('cal');
@@ -68,7 +68,7 @@ describe('ItemEditComponent', () => {
     hostComponent.itemEditComponent.items = testFields;
     const eventEmitterSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     hostComponent.itemEditComponent.updateItems = eventEmitterSpy;
-    
+
     expect(hostComponent.itemEditComponent.items[2].id).toBe(35);
     expect(hostComponent.itemEditComponent.items.length).toBe(5);
 
@@ -88,7 +88,7 @@ describe('ItemEditComponent', () => {
     hostComponent.itemEditComponent.items = testFields;
     const eventEmitterSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     hostComponent.itemEditComponent.updateItems = eventEmitterSpy;
-    
+
     expect(hostComponent.itemEditComponent.items[2].id).toBe(87);
     expect(hostComponent.itemEditComponent.items[2].name).toBe('cheese');
     expect(hostComponent.itemEditComponent.items[2].cal).toBe(892);
@@ -113,7 +113,7 @@ describe('ItemEditComponent', () => {
     hostComponent.itemEditComponent.items = testFields;
     const eventEmitterSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     hostComponent.itemEditComponent.updateItems = eventEmitterSpy;
-    
+
     expect(hostComponent.itemEditComponent.items.length).toBe(4);
 
     const newItem = {'id': 0, 'name': 'knoppers', 'cal': 987};
@@ -123,7 +123,7 @@ describe('ItemEditComponent', () => {
     expect(hostComponent.itemEditComponent.items[4].name).toBe('knoppers');
     expect(hostComponent.itemEditComponent.items[4].cal).toBe(987);
     expect(hostComponent.itemEditComponent.items.length).toBe(5);
-    
+
     expect(tableSpy.renderRows).toHaveBeenCalled();
     expect(eventEmitterSpy.emit).toHaveBeenCalledWith(hostComponent.itemEditComponent.items);
   });
@@ -144,10 +144,10 @@ describe('ItemEditComponent', () => {
     hostComponent.itemEditComponent.items = testFields;
     const eventEmitterSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     hostComponent.itemEditComponent.updateItems = eventEmitterSpy;
-    
+
     const toUpdate = {'id': 87, 'name': 'cheesy', 'cal': 72};
     const updated = {'id': 87, 'name': 'cheesu', 'cal': 823};
-    
+
     const bottomSheetRefSpy = jasmine.createSpyObj('MatBottomSheetRef', ['afterDismissed']);
     bottomSheetRefSpy.afterDismissed.and.returnValue(asyncData(updated));
 
@@ -163,7 +163,7 @@ describe('ItemEditComponent', () => {
     expect(hostComponent.itemEditComponent.items[2].id).toEqual(87);
     expect(hostComponent.itemEditComponent.items[2].name).toBe('cheesu');
     expect(hostComponent.itemEditComponent.items[2].cal).toBe(823);
-    expect(hostComponent.itemEditComponent.items.length).toBe(5)
+    expect(hostComponent.itemEditComponent.items.length).toBe(5);
   });
 
 
@@ -173,10 +173,10 @@ describe('ItemEditComponent', () => {
     hostComponent.itemEditComponent.items = testFields;
     const eventEmitterSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     hostComponent.itemEditComponent.updateItems = eventEmitterSpy;
-    
+
     const toUpdate = {'id': 78, 'name': 'sausages', 'cal': 92};
     const updated = undefined;
-    
+
     const bottomSheetRefSpy = jasmine.createSpyObj('MatBottomSheetRef', ['afterDismissed']);
     bottomSheetRefSpy.afterDismissed.and.returnValue(asyncData(updated));
 
@@ -192,25 +192,25 @@ describe('ItemEditComponent', () => {
     expect(hostComponent.itemEditComponent.items[1].id).toEqual(78);
     expect(hostComponent.itemEditComponent.items[1].name).toBe('sausages');
     expect(hostComponent.itemEditComponent.items[1].cal).toBe(92);
-    expect(hostComponent.itemEditComponent.items.length).toBe(5)
+    expect(hostComponent.itemEditComponent.items.length).toBe(5);
   });
 
-  
+
   it ('should display the bottom sheet item editor with the item indicated by the id', async () => {
     const tableSpy: MatTable<any> = jasmine.createSpyObj('MatTable', ['renderRows']);
     hostComponent.itemEditComponent.table = tableSpy;
     hostComponent.itemEditComponent.items = testFields;
     const eventEmitterSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     hostComponent.itemEditComponent.updateItems = eventEmitterSpy;
-    
+
     const toUpdate = {'id': 78, 'name': 'sausages', 'cal': 92};
     const updated = {'id': 0, 'name': '--', 'cal': 0};
-    
+
     const bottomSheetRefSpy = jasmine.createSpyObj('MatBottomSheetRef', ['afterDismissed']);
     bottomSheetRefSpy.afterDismissed.and.returnValue(asyncData(updated));
 
     bottomSheetSpy.open.and.returnValue(bottomSheetRefSpy);
-    hostComponent.itemEditComponent.editItem(78)
+    hostComponent.itemEditComponent.editItem(78);
 
     await hostFixture.whenStable();
 
@@ -226,10 +226,10 @@ describe('ItemEditComponent', () => {
     hostComponent.itemEditComponent.items = testFields;
     const eventEmitterSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     hostComponent.itemEditComponent.updateItems = eventEmitterSpy;
-    
+
     const newItem = {'id': 0, 'name': undefined, 'cal': undefined};
     const updated = {'id': 999, 'name': 'kjups', 'cal': 392};
-    
+
     const bottomSheetRefSpy = jasmine.createSpyObj('MatBottomSheetRef', ['afterDismissed']);
     bottomSheetRefSpy.afterDismissed.and.returnValue(asyncData(updated));
 
@@ -244,6 +244,6 @@ describe('ItemEditComponent', () => {
     expect(hostComponent.itemEditComponent.items[6].id).toEqual(999);
     expect(hostComponent.itemEditComponent.items[6].name).toBe('kjups');
     expect(hostComponent.itemEditComponent.items[6].cal).toBe(392);
-    expect(hostComponent.itemEditComponent.items.length).toBe(7)
+    expect(hostComponent.itemEditComponent.items.length).toBe(7);
   });
 });

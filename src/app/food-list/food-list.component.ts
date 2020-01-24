@@ -35,7 +35,7 @@ export class FoodListComponent implements OnInit {
   ngOnInit() {
     this.totalCals = 0;
     this.loadFoodResponse();
-    this.counter = Array(7).fill(0).map((x, i) => i);
+    this.counter = Array(5).fill(0).map((x, i) => i);
     this.itemCals = new Map<number, number>();
     this.displayList = true;
     this.displayEditList = false;

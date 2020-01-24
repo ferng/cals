@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpResponse, HttpHeaders } from '@angular/common/ht
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import * as config from '../../assets/config.json';
 
 export interface Food {
   food: Item[];
@@ -16,6 +17,7 @@ export interface Item {
 }
 
 export function itemIdx(items: any, id: number) {
+  console.log(config.app.base_url);
   let idx = 0;
   for (; idx < items.length; idx++) {
     if (items[idx].id === id) {
@@ -30,7 +32,7 @@ export function itemIdx(items: any, id: number) {
   providedIn: 'root'
 })
 export class FoodListService {
-  foodUrl = 'http://localhost:3000/api/cals';
+  foodUrl = config.app.base_url + '/' + config.app.cals_url;
 
   constructor(private http: HttpClient) { }
 
