@@ -1,0 +1,14 @@
+{
+  "app": {
+    "base_url": "http://localhost:3000/",
+    "cals_url": "api/cals",
+    "port": 3000,
+    "deploy_dir": "dist/cals"
+  },
+  "logger" : {
+    "appname": "cals",
+    "file_name": "cals.log.json",
+    "file_level": "trace",
+    "console_level": "trace"
+  }
+}

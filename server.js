@@ -10,6 +10,7 @@ const app = express();
 function requestHandler(req, res, next) {
   log.debug('Inbound request:', req.method, req.originalUrl);
   res.setHeader('Access-Control-Allow-Origin', config.app.base_url);
+//   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT');
   res.setHeader('Cache-Control', 'no-cache');
   next();
@@ -21,7 +22,7 @@ function requestPage(req, res) {
 }
 
 function update(req, res) {
-  console.log(req);
+  log.debug('Inbound page request:', req.method, req.originalUrl);
 }
 
 // initialize app server

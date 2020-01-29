@@ -17,7 +17,6 @@ export interface Item {
 }
 
 export function itemIdx(items: any, id: number) {
-  console.log(config.app.base_url);
   let idx = 0;
   for (; idx < items.length; idx++) {
     if (items[idx].id === id) {
@@ -32,7 +31,7 @@ export function itemIdx(items: any, id: number) {
   providedIn: 'root'
 })
 export class FoodListService {
-  foodUrl = config.app.base_url + '/' + config.app.cals_url;
+  foodUrl = config.app.base_url + config.app.cals_url;
 
   constructor(private http: HttpClient) { }
 
