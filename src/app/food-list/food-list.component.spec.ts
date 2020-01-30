@@ -68,7 +68,7 @@ describe('FoodListComponent', () => {
   it('should set up component via ngOnInit()',
     inject ([HttpTestingController], (httpMock: HttpTestingController) => {
       expect(component.totalCals).toBe(0);
-      expect(component.counter.length).toBe(7);
+      expect(component.counter.length).toBe(6);
       expect(component.displayList).toBe(true);
       expect(component.displayEditList).toBe(false);
 
